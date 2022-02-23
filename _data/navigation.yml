@@ -1,0 +1,11 @@
+- name: Home
+  link: /
+
+- name: MD test
+  link: /test_page_md.html
+
+- name: HTML test
+  link: /test_page_html.html
+
+- name: About
+  link: /about
