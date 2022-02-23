@@ -1,4 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-02-23T15:18:21-08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Kyle J Ray</title><subtitle>Website for testing jekyll and hosting on github pages.</subtitle><entry><title type="html">first post</title><link href="http://localhost:4000/blog/testing/2022/02/23/first-post.html" rel="alternate" type="text/html" title="first post" /><published>2022-02-23T00:00:00-08:00</published><updated>2022-02-23T00:00:00-08:00</updated><id>http://localhost:4000/blog/testing/2022/02/23/first-post</id><content type="html" xml:base="http://localhost:4000/blog/testing/2022/02/23/first-post.html"><![CDATA[<p>Here I am, writinig a blog a post.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-02-23T15:43:20-08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Kyle J Ray</title><subtitle>Website for testing jekyll and hosting on github pages.</subtitle><entry><title type="html">gh-pages workflow</title><link href="http://localhost:4000/blog/testing/2022/02/23/gh-pages_workflow.html" rel="alternate" type="text/html" title="gh-pages workflow" /><published>2022-02-23T03:40:00-08:00</published><updated>2022-02-23T03:40:00-08:00</updated><id>http://localhost:4000/blog/testing/2022/02/23/gh-pages_workflow</id><content type="html" xml:base="http://localhost:4000/blog/testing/2022/02/23/gh-pages_workflow.html"><![CDATA[<h3 id="attempting-to-document-the-workflow-for-using-a-separate-branch-to-track-website-progress">Attempting to document the workflow for using a separate branch to track website progress</h3>
+
+<ol>
+  <li>
+    <p>Start with an extablished repositroy you want to build a website for. Build a website locally (this is the hard part), in a subdirectory of the established repository; you do not want this to be tracked by the main repo, so adding it in .gitignore is probably wise.</p>
+  </li>
+  <li>
+    <p>Navigate to the folder where you built the website, and do a git init</p>
+  </li>
+  <li>
+    <p>git add everything in the _site/ directory and do a commit</p>
+  </li>
+  <li>
+    <p>Now, run the following command git subtree push –prefix _site/ origin gh-pages</p>
+  </li>
+  <li>
+    <p>The hope is that the command above will create a new branch called gh-pages on the existing repository.</p>
+  </li>
+  <li>
+    <p>Go to the repo settings and under ‘pages’ tell is to use the root directory of the branch gh-pages as the source</p>
+  </li>
+  <li>
+    <p>Whenever you edit the site and want to publish a new version, repeat steps 3 and 4</p>
+  </li>
+</ol>
+
+<p>One issue with this method, is that you havent done version control on the actual directory you use to create the website– but the generated site files themselves. Perhaps it is better to push the entire direcotry where you built the website and then tell github to use _site/ as the directory.</p>]]></content><author><name></name></author><category term="blog" /><category term="testing" /><summary type="html"><![CDATA[Attempting to document the workflow for using a separate branch to track website progress]]></summary></entry><entry><title type="html">first post</title><link href="http://localhost:4000/blog/testing/2022/02/23/first-post-copy.html" rel="alternate" type="text/html" title="first post" /><published>2022-02-23T00:00:00-08:00</published><updated>2022-02-23T00:00:00-08:00</updated><id>http://localhost:4000/blog/testing/2022/02/23/first-post%20copy</id><content type="html" xml:base="http://localhost:4000/blog/testing/2022/02/23/first-post-copy.html"><![CDATA[<p>Here I am, writinig a blog a post.</p>
 
 <ul>
   <li>Hope it works
