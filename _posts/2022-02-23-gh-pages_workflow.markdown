@@ -23,7 +23,9 @@ categories: blog testing
 
 7. Whenever you edit the site and want to publish a new version, repeat steps 3 and 4
 
-One issue with this method, is that you haven't done version control on the actual directory you use to create the website-- but the generated site files themselves. If you want to do the whole directory, it looks like github pages is smart enough to look at the _site subdirectory and make the website from there. See below for a second attempt that I think works better.
+One issue with this method, is that you haven't done version control on the actual directory you use to create the website-- but the generated site files themselves. So I am going back to the drawing board to see if there is a better way to do this. \\
+
+The attempt above represents my misunderstanding how good github pages is at dealing with jekyll, it looks like github pages is smart enough to build the website itself with jekyll. You do not need to upload the _site/ directory at all. See below for a second attempt that I think works better.
 
 ### A second attempt at doing the above:
 
@@ -33,7 +35,7 @@ One issue with this method, is that you haven't done version control on the actu
 
 3. `git checkout -b gh-pages`
 
-4. git add anything and everything in the website directory that you want to have in veriosn conrol(build files as well). The only thing you definitely need to add is the _site/ subdiectory
+4. git add anything and everything in the website directory that you need to build the website, but you can put _site/ in a .gitignore. You do not need it. It will also double down on assets unecesarially so its actual bad to have it tracked.
 
 5. commit and do  `git push -u origin gh-pages`
 
