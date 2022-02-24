@@ -5,7 +5,7 @@ date:   2022-02-23-3:40
 categories: blog testing
 ---
 
-### Attempting to document the workflow for using a separate branch to track website progress
+### First attempt at using a separate branch to track website progress
 
 1. Start with an extablished repositroy you want to build a website for. Build a website locally (this is the hard part), in a subdirectory of the established repository; you do not want this to be tracked by the main repo, so adding it in .gitignore is probably wise.
 
@@ -21,24 +21,23 @@ categories: blog testing
 
 7. Whenever you edit the site and want to publish a new version, repeat steps 3 and 4
 
-One issue with this method, is that you havent done version control on the actual directory you use to create the website-- but the generated site files themselves. Perhaps it is better to push the entire direcotry where you built the website and then tell github to use _site/ as the directory. \\
+One issue with this method, is that you haven't done version control on the actual directory you use to create the website-- but the generated site files themselves. If you want to do the whole directory, it looks like github pages is smart enough to look at the _site subdirectory and make the website from there. See below for a second attempt that I think works better.
 
 ### A new attempt at doing the above:
 
-1. Same as above
+1. Start with an extablished repositroy you want to build a website for. Build a website locally (this is the hard part), in a subdirectory of the established repository; you do not want this to be tracked by the main repo, so adding it in .gitignore is probably wise.
 
-2. Same as above
+2. Navigate to the folder where you built the website, and do a git init
 
 3. git checkout -b gh-pages
-    - this creates a branch called gh-pages and switches to it
 
-4. git add everything in the website directory (build files as well)
+4. git add anything and everything in the website directory that you want to have in veriosn conrol(build files as well). The only thing you definitely need to add is the _site/ subdiectory
 
-5. commit them and do  'git push -u origin gh-pages'
+5. commit and do  `git push -u origin gh-pages`
 
 6. Same as above
 
-7. still testing how to update
+7. Now you can just add and push like keeping a normal directory up to date
 
 
 
