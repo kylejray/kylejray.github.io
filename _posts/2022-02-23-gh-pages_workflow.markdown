@@ -11,6 +11,7 @@ categories: blog testing
 - it's easy to make something bare-bones but can be as involved as you want. Sam's cheatsheet gives the basic commands for making a skeleton-website that you can use to figure out how jekyll works. here is an excerpt from it:
 
 - ![Sam's cheatsheet]({{site.url}}/assets/images/sam_cheatsheet_jekyll.png)
+- [Sam's cheatsheet]({{site.url}}/assets/images/sam_cheatsheet_jekyll.png)
     thank you [Sam](https://samlikesphysics.github.io/)! the cheatsheet is super useful
 
 2. Navigate to the folder where you built the website, and do a `git init`
