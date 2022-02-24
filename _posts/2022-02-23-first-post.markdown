@@ -11,3 +11,5 @@ Here I am, writinig a blog a post.
     - but we shall see
         - if it does
 
+Looks like there is no spellcheck though >_>
+
