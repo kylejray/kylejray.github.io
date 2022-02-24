@@ -21,6 +21,27 @@ categories: blog testing
 
 7. Whenever you edit the site and want to publish a new version, repeat steps 3 and 4
 
-One issue with this method, is that you havent done version control on the actual directory you use to create the website-- but the generated site files themselves. Perhaps it is better to push the entire direcotry where you built the website and then tell github to use _site/ as the directory.
+One issue with this method, is that you havent done version control on the actual directory you use to create the website-- but the generated site files themselves. Perhaps it is better to push the entire direcotry where you built the website and then tell github to use _site/ as the directory. \\
+
+### A new attempt at doing the above:
+
+1. Same as above
+
+2. Same as above
+
+3. git checkout -b gh-pages
+    - this creates a branch called gh-pages and switches to it
+
+4. git add everything in the website directory (build files as well)
+
+5. commit them and do  'git push -u origin gh-pages'
+
+6. Same as above
+
+7. still testing how to update
+
+
+
+
 
 
