@@ -17,7 +17,8 @@ layout: page
     1. An embedable link. For example from google drive the share link ends with `/view?usp=sharing` and the embed link ends with `/preview`
     2. an iframe HTML object
         {% highlight HTML %}
-        <iframe width="480" height="320" src="embedable_link" >
+        <iframe width="480" height="320" src="embedable_link" > 
+        </iframe>
          {% endhighlight %}
 
 - [position space](https://drive.google.com/file/d/1FvUIWMge2U879SUwjDSK2VEllUola4B_/preview)
