@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "video tiling in pytho ffmpeg"
+title:  "video tiling in python ffmpeg"
 date:   2022-03-01-1:30
 categories: python, ffmpeg, video editing
 ---
@@ -32,7 +32,7 @@ ffmpeg -i lead_1.mp4 -i lead_2.mp4 -i lead_3.mp4 -i lead_4.mp4
 
 {% endhighlight %}
 
-Even copying and pasting as hard as I could... I was unable to get answers like this to work. So Instead I turned to [python-ffmpeg](https://github.com/kkroening/ffmpeg-python) which you can download with conda-forge. This allowed me to write a short function that would do the job I needed, while also being relatively readable. See below for my function:
+There is an explanation of what is going on above on [this page](https://trac.ffmpeg.org/wiki/Create%20a%20mosaic%20out%20of%20several%20input%20videos), but even copying and pasting as hard as I could... I was unable to get answers like this to work. So Instead I turned to [python-ffmpeg](https://github.com/kkroening/ffmpeg-python) which you can download with conda-forge. This allowed me to write a short function that would do the job I needed, while also being relatively readable. See below for my function:
 
 {% highlight python %}
 import os, ffmpeg
