@@ -10,8 +10,8 @@ categories: blog testing
 1. Start with an extablished repositroy you want to build a website for. Build a website locally  in a subdirectory of the established repository. You do not want this to be tracked by the main repo, so adding it in .gitignore is probably wise.
 - it's easy to make something bare-bones but can be as involved as you want. Sam's cheatsheet gives the basic commands for making a skeleton-website that you can use to figure out how jekyll works. here is an excerpt from it:
 
-- ![Sam's cheatsheet](../assets/images/sam_cheatsheet_jekyll.png)
-- [Sam's cheatsheet]()../assets/images/sam_cheatsheet_jekyll.png)
+- ![Sam's cheatsheet](https://kylejray.github.io/assets/images/sam_cheatsheet_jekyll.png)
+- [Sam's cheatsheet](https://kylejray.github.io/assets/images/sam_cheatsheet_jekyll.png)
     thank you [Sam](https://samlikesphysics.github.io/)! the cheatsheet is super useful
 
 2. Navigate to the folder where you built the website, and do a `git init`
