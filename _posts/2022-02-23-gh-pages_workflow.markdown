@@ -38,10 +38,10 @@ The attempt above represents my misunderstanding of how good github pages is at 
 
 2. Navigate to the folder where you built the website, and initialize a new local repository. git add and commit everything in the website directory. You can put _site/ in a .gitignore. You do not need it. It will also double down on assets unecesarially so its actually bad to have it tracked. If you use [jekyll](https://jekyllrb.com/) to make the website, the ignore will be auto-generated for you.
 
-3. Now, add your established remote github repo as the upstream repository, but on a branch called 'gh-pages' instead of 'main'gi.
-    `git remote add origin <URL>`
-    `git branch -M gh-pages`
-    `git push -u origin gh-pages`
+3. Now, add your established remote github repo as the upstream repository, but on a branch called 'gh-pages' instead of 'main'.
+    - `git remote add origin <URL>`
+    - `git branch -M gh-pages`
+    - `git push -u origin gh-pages`
 
 4. Go to the repo settings and under 'pages' tell is to use the root directory of the branch gh-pages as the source
 
