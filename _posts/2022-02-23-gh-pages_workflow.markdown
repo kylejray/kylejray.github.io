@@ -10,8 +10,8 @@ categories: blog testing
 1. Start with an extablished repositroy you want to build a website for. Build a website locally  in a subdirectory of the established repository. You do not want this to be tracked by the main repo, so adding it in .gitignore is probably wise.
 - it's easy to make something bare-bones but can be as involved as you want. Sam's cheatsheet gives the basic commands for making a skeleton-website that you can use to figure out how jekyll works. here is an excerpt from it:
 
-- ![Sam's cheatsheet](assets/images/sam_cheatsheet_jekyll.png)
-- [Sam's cheatsheet]({{site.url}}/assets/images/sam_cheatsheet_jekyll.png)
+- ![Sam's cheatsheet](../assets/images/sam_cheatsheet_jekyll.png)
+- [Sam's cheatsheet]()../assets/images/sam_cheatsheet_jekyll.png)
     thank you [Sam](https://samlikesphysics.github.io/)! the cheatsheet is super useful
 
 2. Navigate to the folder where you built the website, and do a `git init`
@@ -22,7 +22,7 @@ categories: blog testing
 
 5. The hope is that the command above will create a new branch called gh-pages on the existing repository.
 
-6. Go to the repo settings and under 'pages' tell it to use the root directory of the branch gh-pages as the source
+6. Go to the repo settings and under 'pages' tell it to use the root directory of the branch `gh-pages` as the source
 
 7. Whenever you edit the site and want to publish a new version, repeat steps 3 and 4
 
@@ -43,7 +43,7 @@ The attempt above represents my misunderstanding of how good github pages is at 
     - `git branch -M gh-pages`
     - `git push -u origin gh-pages`
 
-4. Go to the repo settings and under 'pages' tell is to use the root directory of the branch gh-pages as the source
+4. Go to the repo settings and under 'pages' tell is to use the root directory of the branch 'gh-pages' as the source
 
 5. Now you can just add/commit/push like keeping a normal directory up to date
 
