@@ -2,10 +2,10 @@
 layout: standalone
 
 permalink: /state_space/
-exclude: true
 
 sa_title : Momentum Computing
 sa_home : /momentum/
+sa_index : momentum_computing.markdown
 ---
 
 ## The State Space Picture of Landauer's bound
