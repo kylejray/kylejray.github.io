@@ -4,6 +4,4 @@
 
 layout: home
 ---
-image test:
-![Image for Testing](assets/images/all_state_alpha.png)
 

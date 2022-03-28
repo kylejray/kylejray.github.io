@@ -8,6 +8,6 @@ sa_title : Momentum Computing
 sa_home : /momentum/
 ---
 
-## The State Space Picture of Computatioin
+## The State Space Picture of Landauer's bound
 
-![State Space Picture](https://kylejray.github.io/assets/images/EraseVersusBitSwap.png)
+![State Space Picture](https://kylejray.github.io/assets/images/EraseVersusSwapBit.png)
