@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+
+  <body>
+
+    {%- include standalone_header.html -%}
+  
+    
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+    {%- include mc_navigation.html -%}
+        {{ content }}
+      </div>
+    </main>
+
+    {%- include standalone_footer.html -%}
+
+  </body>
+
+</html>

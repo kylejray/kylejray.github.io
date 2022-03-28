@@ -1,0 +1,8 @@
+- name: Fredkin
+  link: /fredkin
+
+- name: Sub Landauer
+  link: /gslmc
+
+- name: State Space
+  link: /state_space
