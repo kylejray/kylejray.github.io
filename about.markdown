@@ -3,17 +3,12 @@ layout: page
 title: About
 permalink: /about/
 ---
-### This page is supposed to be about me, but since I am still learning how to do anything with a website-- its about jekyll instead.
+Hi, my name is Kyle Ray. I am a graduate student researcher working under [Jim Crutchfield](http://csc.ucdavis.edu/~chaos/) in the physics department at UC Davis. The main purpose of this website is to document interesting or useful coding tricks I pick up while working (mostly for my own reference, though ostensibly for posterity) as well as host animations and images to supplement publications.
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+The website is build using the minima theme for jekyll, and is hosted on github pages.
+
+
 
 You can find the source code for Minima at GitHub:
 [jekyll][jekyll-organization] /
 [minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
-
-
-[jekyll-organization]: https://github.com/jekyll
