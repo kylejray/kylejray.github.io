@@ -12,7 +12,7 @@ Practical, useful computations are instantiated via physical processes. Informat
 
 
 K. J. Ray, G. W. Wimsatt, A. B. Boyd, and J. P. Crutchfield,
-- Non-Markovian Momentum Computing: Thermodynamically Efficient and Computation Universal
+- Non-Markovian Momentum Computing: Thermodynamically Efficient and Computation Universal, (2021).
 - [Physical Review Research 3:2 (2021) 023164. doi:10.1103/PhysRevResearch.3.023164](https://journals.aps.org/prresearch/abstract/10.1103/PhysRevResearch.3.023164)
 
 Selected animations of continuous-time thermodynamically-free Fredkin gate:
