@@ -12,7 +12,7 @@ sa_home : /momentum/
 This is a supplemental animation to help visualize the protocol described in the manuscript below:
 
 K. J. Ray and J. P. Crutchfield,
-- Gigahertz Sub-Landauer Momentum Computing,(2022).
+- Gigahertz Sub-Landauer Momentum Computing, (2022).
 - [arxiv.org:2202.07122 [cond-mat.stat-mech]](https://arxiv.org/abs/2202.07122)
 
 <iframe width="540" height="540" align='left' src="https://drive.google.com/file/d/1JKr4OOiggspkMIBn4IaeBqyQaJ31ol2b/preview">
