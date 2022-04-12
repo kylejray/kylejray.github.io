@@ -23,3 +23,5 @@ sa_home : /momentum/
 - [Scientific American](https://www.scientificamerican.com/article/momentum-computing-pushes-technologys-thermodynamic-limits/)
 
 - [UC Davis Physics News](https://physics.ucdavis.edu/news-events/physics-news/momentum-computing-pushes-technologys-thermodynamic-limits)
+
+- [Communications of the ACM](https://cacm.acm.org/news/259680-momentum-computing-pushes-technologys-thermodynamic-limits/fulltext)
