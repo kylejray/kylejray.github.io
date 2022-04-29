@@ -27,3 +27,5 @@ sa_home : /momentum/
 - [Communications of the ACM](https://cacm.acm.org/news/259680-momentum-computing-pushes-technologys-thermodynamic-limits/fulltext)
 
 - [Foundational Questions Institute](https://fqxi.org/community/articles/display/260)
+
+- [SFI newsletter](https://mailchi.mp/santafe/sfi-parallax-newsletter-january-1231758)
