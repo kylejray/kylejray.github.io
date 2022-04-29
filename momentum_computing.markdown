@@ -28,4 +28,4 @@ sa_home : /momentum/
 
 - [Foundational Questions Institute](https://fqxi.org/community/articles/display/260)
 
-- [SFI newsletter](https://mailchi.mp/santafe/sfi-parallax-newsletter-january-1231758)
+- [SFI Newsletter](https://mailchi.mp/santafe/sfi-parallax-newsletter-january-1231758)
