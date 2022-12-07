@@ -2,7 +2,7 @@
 layout: standalone
 
 permalink: /szilard/
-exclude: true
+
 
 sa_title : Szilard Engine Simulations
 sa_home : /szilard/
@@ -25,5 +25,3 @@ This is a supplemental animation to help visualize the protocol described in my 
 </iframe>
 
 - A sample of trajectories undergoing the Szilard engine protocol above. The timescale and energetic barriers are not tuned for a high fidelity or low work operation, but instead are tuned to be illustrative of the thermal effects that can cause errors in the computation. Here the timescale of operation is such that the instantaneous distribution is not globally in equilibrium, but still approximately in equilibrium within any particular well.
-
-- [Video Download Links](https://drive.google.com/file/d/1Vj_Tzt-somZMHP91ZYHOhXrU1Jiewbja/view?usp=sharing)(https://drive.google.com/file/d/1Vj_Tzt-somZMHP91ZYHOhXrU1Jiewbja/view?usp=sharing)
