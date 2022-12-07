@@ -15,7 +15,7 @@ K. J. Ray and J. P. Crutchfield,
 - Gigahertz Sub-Landauer Momentum Computing, (2022).
 - [arxiv.org:2202.07122 [cond-mat.stat-mech]](https://arxiv.org/abs/2202.07122)
 
-<iframe width="540" height="540" align='left' src="https://drive.google.com/file/d/1JKr4OOiggspkMIBn4IaeBqyQaJ31ol2b/preview">
+<iframe width="540" height="540" align='right' src="https://drive.google.com/file/d/1JKr4OOiggspkMIBn4IaeBqyQaJ31ol2b/preview">
 </iframe>
 
 

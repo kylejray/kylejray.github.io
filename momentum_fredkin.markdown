@@ -17,18 +17,18 @@ K. J. Ray, G. W. Wimsatt, A. B. Boyd, and J. P. Crutchfield,
 
 Selected animations of continuous-time thermodynamically-free Fredkin gate:
 
-<iframe width="540" height="540" align='left' src="https://drive.google.com/file/d/1KHs3RkkAYjDXOaH9dKPVRGq3TtJvNloJ/preview">
+<iframe width="540" height="540" align='right' src="https://drive.google.com/file/d/1KHs3RkkAYjDXOaH9dKPVRGq3TtJvNloJ/preview">
 </iframe>
 
 - Particle ensemble undergoing the Fredkin-gate protocol, with initial conditions drawn from the equilibrium distribution of the storage potential. We see that the momentum the particles pick up while traveling to the point acts as a memory, allowing us to continue to control the disparate initial conditions independently. Here, we easily see how the action of two parabolic wells with differing characteristic frequencies allows for 110 and 101 to swap places, while 100 and 111 complete a full cycle, returning to their initial coordinates.
 
 
-<iframe width="540" height="540" align='left' src="https://drive.google.com/file/d/1FzA94lE3TPSRL8c5sgKRoEX8bAVxDmH_/preview">
+<iframe width="540" height="540" align='right' src="https://drive.google.com/file/d/1FzA94lE3TPSRL8c5sgKRoEX8bAVxDmH_/preview">
 </iframe>
 
 - (Left) Particle ensemble undergoing the Fredkin-gate protocol, with initial conditions drawn from the equilibrium distribution of the storage potential. Looking at the dynamics projected onto the y-z plane allows for a clear view of how the controlled-swap operation takes place in the computational subspace. The grey points represent storage bits that are not exposed to the computational potential. Note especially that the particles not only end in the appropriate informational quadrant, but also their initial distribution over that quadrant—which is a necessary condition for the net thermodynamic work to vanish. (Right) An illustrative animation of how a uniform distribution over y and z changes over the protocol duration. Each colored square represents a uniform distribution in the corresponding y,z quadrant, with z = 2 and vx = vy = vz = 0.
 
-<iframe width="540" height="540" align='left' src="https://drive.google.com/file/d/1VzF-DruEbuUmd9gNMANmkHsYlGUKJnQC/preview">
+<iframe width="540" height="540" align='right' src="https://drive.google.com/file/d/1VzF-DruEbuUmd9gNMANmkHsYlGUKJnQC/preview">
 </iframe>
 
  - Particle ensemble undergoing the Fredkin-gate protocol, with initial conditions drawn from the equilibrium distribution of the storage potential. The y' and z' phase spaces allows us to see the most relevant projection of the rotation that takes place in the full phase space. When the computational protocol turns on, the particles associated with x > 0 stop rotating about local storage well minima, and start rotation about the minima of Vcomp. Side by side, we clearly see a full period in the z' subspace and only half a period in the y' subspace—as required to perform the Fredkin gate.
