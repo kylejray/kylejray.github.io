@@ -1,5 +1,5 @@
 ---
-layout: standalone
+layout: standalone_real
 
 permalink: /szilard/
 
