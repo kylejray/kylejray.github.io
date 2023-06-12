@@ -21,5 +21,3 @@ This handy tool can be used to dettach terminal sessions from you main window, s
 3. start the jupyter lab instance with --no-browser (keep the port number and key handy)
 4. press "*command* + b", releasse the keys, and then press "d". This should dettach the tmux session you just started, and you should be able to close the terminal window without interrupting it.
 5. The jupyter instance should keep going until you manually close it by opening up another ssh tunnel to the **remote machine** and close it by using the tmux kill-session command. Here is a handy [tmux cheatsheet](https://tmuxcheatsheet.com/).
-
-$$ x^y+1$$
