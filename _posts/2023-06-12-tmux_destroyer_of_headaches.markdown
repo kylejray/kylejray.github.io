@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "tmux saves"
+title:  "tmux, destroyer of SSH headaches"
 date:   2023-06-12-2:30
 categories: python, jupyter, remote computing, HPC, anaconda, ipython, tmux, brew
 ---
