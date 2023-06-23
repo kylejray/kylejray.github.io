@@ -43,7 +43,7 @@ The final step is to run the simulation and save the output however you please (
 import sys
 
 print(f'rank {rank} starting sim with p={simParam[rank]}')
-#MPI like to cache all the print statements and then dump them all at the end. 
+#MPI likes to cache all the print statements and then dump them all at the end. 
 #One way to make sure they print out during
 #the process is to consistently flush this cache using sys.stdout.flush()
 sys.stdout.flush()
@@ -65,7 +65,7 @@ mpirun -n <N> python shameful_mpi.py
 The "N" argument just tells you how many processes to spawn. Thats it! We are done. 
 
 ### Simple extension if you are node limited
-Lets say you only have 8 nodes to work on, but you want to run 30 parameters. This can be dealth with simply by breaking up your parameters into subsets of 4 and then running serially through one subset on each process. For example:
+Lets say you only have 8 nodes to work on, but you want to run 30 parameters. This can be dealt with simply by breaking up your parameters into subsets of 4 and then running serially through one subset on each process. For example:
 
 {% highlight python %}
 
