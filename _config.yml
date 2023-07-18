@@ -23,7 +23,7 @@ title: kylejray.github.io
 description: >- # this means to ignore newlines until "baseurl:"
   personal website attempting to document my progress in coding and physics.
 # baseurl: "" # the subpath of your site, e.g. /blog
-url: "kylejray.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://kylejray.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: jekyllrb
 github_username:  kylejray
 
