@@ -4,7 +4,7 @@ title:  "sampling from an arbitrary distribution"
 date:   2023-06-28
 categories: statistics, probability, thermodynamics, python
 ---
-
+{% include mathjax.html %}
 ### The first thing you probably found
 
 If you ask a random person (conditioned on them being a reasonable target for this question) how to sample from an arbitrary distribution, you are pretty likely to get this answer: "Just sample form a uniform distribution between 0 and 1, and invert the samples using the inverse cdf". This is a wonderfully elegant solution, and we might as well start by looking at how it works. We'll use a really simple PDF for lillustrative purposes: $$\text{pdf}(x) = 2x$$, which will be normalized with a domain of $$x \in [0,1]$$.
