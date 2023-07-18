@@ -27,7 +27,7 @@ Host <SERVER NICKNAME>
 Now, all you need to type is 
 
 {% highlight bash %}
-ssh <SERVE NICKNAME>
+ssh <SERVER NICKNAME>
 {% endhighlight %}
 But, it is still going to ask for your password. This is nice, but let's take it to the next level.
 
