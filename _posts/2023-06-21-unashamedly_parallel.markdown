@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Using mpi4py for actually parallel computing: take 1"
+title:  "using mpi4py for actually parallel computing: take 1"
 date:   2023-06-21 01:35:00 -0800
 categories: parallel computing, MPI, python, HPC, high performance computing
 ---
