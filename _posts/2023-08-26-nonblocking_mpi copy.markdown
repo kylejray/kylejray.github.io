@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "using MPI's nonblocking communication in python"
+title:  "nonblocking MPI message passing in python"
 date:   2023-08-26
 categories: parallel computing, MPI, python, HPC, high performance computing
 ---

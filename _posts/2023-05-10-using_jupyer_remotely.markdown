@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "using a jupyter notebook to run code on a remote server"
+title:  "run code on a remote server using a jupyter notebook"
 date:   2023-05-01-1:30
 categories: python, jupyter, remote computing, HPC, anaconda, ipython
 ---
