@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "return of the sampling from an arbitrary distribution"
+title:  "return of the 'sampling from an arbitrary distribution' "
 date:   2023-07-31
 categories: statistics, probability, thermodynamics, python
 ---
 {% include mathjax.html %}
 
-#### note: part 2 of a series on sampling from arbitrary distrbution, I suggest reading [the first one before continuing](https://kylejray.github.io/statistics,/probability,/thermodynamics,/python/2023/06/28/distribution-sampling.html)
+#### note: part 2 of a series on sampling from arbitrary distrbutions, I suggest reading [the first one before continuing](https://kylejray.github.io/statistics,/probability,/thermodynamics,/python/2023/06/28/distribution-sampling.html)
 
 ### Refresher
 
@@ -165,7 +165,7 @@ This means that we should expect the upper histogram to be more than twice as ef
 
 ### Unnormalized distributions
 
-You may have already intuited that this will work for unnormalized distributions too. If the distributions $f$ and $g$ are written as an unnormalized part $f_u$ and $g_u$, multiplied by a normalization constants $N_f$ and $N_g$, we simply redefine $M$ to absorb those constants. The downside here is that we lose interpretability of $M$, which no longer corresponds so directly to the efficency of the algorithm. A quick example:
+You may have already intuited that this will work for unnormalized distributions too. If the distributions $$f$$ and $$g$$ are written as an unnormalized part $$f_u$$ and $$g_u$$, multiplied by a normalization constants $$N_f$$ and $$N_g$$, we simply redefine $$M$$ to absorb those constants. The downside here is that we lose interpretability of $$M$$, which no longer corresponds so directly to the efficency of the algorithm. A quick example:
 
 {% highlight python %}
 #make a new pdf, unnormalized. 

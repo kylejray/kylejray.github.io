@@ -1,9 +1,11 @@
 ---
 layout: post
 title:  "using mpi4py for actually parallel computing: take 1"
-date:   2023-06-21 01:35:00 -0800
+date:   2023-06-21
 categories: parallel computing, MPI, python, HPC, high performance computing
 ---
+
+#### this post assumes an understanding of a previous post on basic MPI usage in python, I suggest reading [that one before continuing](https://kylejray.github.io/parallel/computing,/mpi,/python/2022/08/20/embarassing-parallel.html)
 
 ### unashamedly parallel computing
 
@@ -14,7 +16,7 @@ In order to try this out, I have set up what I think is a very simple task that 
 
 The code we are going to work on is simple: a guessing game. Each process will be given the task of guessing digits that havent been guessed by any of the other processes yet. They will go on guessing until all the 1-9 positive integers have been guessed.
 
-While the goal is easy enough, actually making it happen is another matter. Take a look at the minimal working example below. Despite the pleothera of example MPI scripts online, I promise you that they wont just do what you want them to do out of the box. The code below actualy comes at the expense of a lot of trial and error--despite looking very simple.
+While the goal is easy enough, actually making it happen is another matter. Take a look at the minimal working example below. Despite the pleothera of example MPI scripts online, I promise you that they wont just do what you want them to do out of the box if you aren't doing *exactly* what the examples already do. The code below actualy comes at the expense of a lot of trial and error--despite looking very simple.
 
 
 {% highlight python %}
@@ -64,7 +66,7 @@ It really is important to play around with this stuff first hand. There is no su
 
 ### did it work?
 
-The code does approximately what we were hopinh, but there is more going on under the hood. First off, if there is a "tie" in that two processes guess the same number o the same guess-- they both get a point. We didn't specify this rule, so its not exactly a failure, but we do want to know how to aovid this. There is some implicit loop-syncing going on between the processes. After running the code with a few different options, I noticed that the number of guesses plus the number of points is the same for every process, implying the computation in one process is blocked at certain point, until the other processes "catch up". Let's verify this by implementing a time.sleep(rank+1) command before each guess. Naively, this should cause high rank processes to be slower and get few (if any) guesses in before the game ends.
+The code does approximately what we were hoping, but there is more going on under the hood. First off, if there is a "tie" in that two processes guess the same number o the same guess-- they both get a point. We didn't specify this rule, so its not exactly a failure, but we do want to know how to aovid this. There is also some implicit loop-syncing going on between the processes. After running the code with a few different options, I noticed that the number of guesses plus the number of points is the same for every process, implying the computation in one process is blocked at certain point, until the other processes "catch up". Let's verify this by implementing a time.sleep(rank+1) command before each guess. Naively, this should cause high rank processes to be slower and get few (if any) guesses in before the game ends.
 
 We are going use datime as well, which is useful for figuring out when things happen. By now, you may have noticed that the order of the print statements that come from an MPI script is a bit unintuitive. Here is a helpful tool I use a lot when debugging and timing things:
 
@@ -75,7 +77,7 @@ def rel_time(start_time):
     return (current_time-start_time).total_seconds()
 {% endhighlight %}
 
-Now, let's ammend the script above-- to include our changes. This will also give us a chance to play around with the comm.bcast MPI command; whihc allows us to boradcast the initial starting time from one process to all the others. This ensures they have a common reference point.
+Now, let's ammend the script above-- to include our changes. This will also give us a chance to play around with the comm.bcast MPI command; which allows us to boradcast the initial starting time from one process to all the others. This ensures they have a common reference point.
 
 {% highlight python %}
 from mpi4py import MPI
@@ -97,13 +99,10 @@ if rank==0:
 #broadcast that value to all ranks, so they have a common reference time
 stime = comm.bcast(stime, root=0)
 
-#define the rel_time function
-def rtime():
-    return rel_time(stime)
 
 #and a new print function that will add the relative time to the front
 def tprint(string):
-    print(f'{rtime():.2f}: ' + string )
+    print(f'{rel_time(stime):.2f}: ' + string )
     return
 
 final_list = [0]
@@ -190,7 +189,9 @@ After running this verson of the code, we can see some really interesting behavi
 {% endhighlight %}
 
 
- My initial guess is that it is the allreduce operations that cause the syncing issues, but it is hard to tell, because the guessing is not delayed in the way I would have expected. Sometime, the relative delay of 1 second seems to work but other times it does not. But these times do not look so reliable. Further testing is definitely necesarry.
+ My initial guess is that it is the allreduce operations that cause the syncing issues, but it is hard to tell, because the guessing is not delayed in the way I would have expected. Sometime, the relative delay of 1 second seems to work but other times it does not. The times do not look so reliable so we'll ignore them for now. Further testing is definitely necesarry.
+
+ #### update: after some testing, it turns out the timing issues were just discrete math errors. The timing was working as intended,07 and was fixed by formatting the realative time more carefully. This doesnt fix the issue below, but at least the timing isn't an issue.
  
  At first glance, it seems almost like allreduce cannot happen until all of the processes reach an allreduce line. In order to really make this work, we might need to deal with some manual sending/recieving from/to specific processes instead of relying on allreduce. This post is already geting too long, the next post will continue this investigation.
 

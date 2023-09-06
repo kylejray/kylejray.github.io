@@ -1,15 +1,15 @@
 ---
 layout: post
-title:  "Using mpi4py to make embarassingly parallel computation simple"
-date:   2022-08-20 01:35:00 -0800
-categories: parallel computing, MPI, python
+title:  "using mpi4py to make embarassingly parallel computation simple"
+date:   2022-08-20
+categories: parallel computing, MPI, python, HPC, high performance computing
 ---
 
 ### What are we doing here?
 
 I have been using our computing cluster for a couple years now to do large suites of simulations that would otherwise take weeks to run on my laptop. Since I work mostly in simulations of nanoscale thermal systems, I often am looking for good satistics on noisy and uninterating systems-- so this can be all I need.
 
-It was a tiny bit intimidating at firs, but pretty quickly I realized that these kind of tasts are massively easy to run and incorporate into python, using the mpi4py library.
+It was a tiny bit intimidating at first, but pretty quickly I realized that these kind of tasks are massively easy to run and incorporate into python, using the mpi4py library.
 
 The instalation of mpi4py can be a little finicky in the way it interacts with your MPI distribution (which also will need to be installed). I usually make sure that when I run MPI code, I am using a clean environment that has only what is necesarry to run the code. But this isnt about the installation, it's supposed to be a quick and dirty guide to get a bunch of jobs running simultaneously when they dont need to communicate.
 
