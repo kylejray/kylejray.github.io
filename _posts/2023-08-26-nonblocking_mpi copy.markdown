@@ -6,7 +6,9 @@ categories: parallel computing, MPI, python, HPC, high performance computing
 ---
 {% include mathjax.html %}
 
-#### note: part 3 of a series on using MPI in python, I suggest reading [the previous one before continuing](https://kylejray.github.io/parallel/computing,/mpi,/python,/hpc,/high/performance/computing/2023/06/21/unashamedly_parallel_2.html)
+#### note: part 3 of a series on using MPI in python, I suggest reading [the previous one before continuing](https://kylejray.github.io/parallel/computing,/mpi,/python,/hpc,/high/performance/computing/2023/08/11/unashamedly_parallel_2.html)
+
+
 
 ### Refresher
 In the third part of this series, we continued to try to do some very simple parallel computing (without being "embarassingly parallel") using MPI. The task was simple: have several independent processes(procs) guess random integers from 1 to 10, scoring points for integers havent been guessed yet. We achieved somethig kind of close to this, but we weren't able to de-sync the procs. Basically, even by making some procs slower tha others-- each was still getting the same number of guesses over the full computation. The solution was to step away from the usual results you get when you google how to use MPI: allreduce, gather, broadcast, etc.... Instead, we are going to use nonblockng MPI message passing. 

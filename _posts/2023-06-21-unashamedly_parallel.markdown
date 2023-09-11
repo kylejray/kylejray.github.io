@@ -5,7 +5,8 @@ date:   2023-06-21
 categories: parallel computing, MPI, python, HPC, high performance computing
 ---
 
-#### this post assumes an understanding of a previous post on basic MPI usage in python, I suggest reading [that one before continuing](https://kylejray.github.io/parallel/computing,/mpi,/python/2022/08/20/embarassing-parallel.html)
+#### this post assumes an understanding of a previous post on basic MPI usage in python, I suggest reading [that one before continuing](https://kylejray.github.io/parallel/computing,/mpi,/python,/hpc,/high/performance/computing/2022/08/20/embarassing-parallel.html)
+
 
 ### unashamedly parallel computing
 
