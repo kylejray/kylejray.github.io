@@ -63,7 +63,7 @@ print(f'rank {rank} got {j} points with {i} guesses')
 
 ## stop here, and actually run the code above before proceeding. 
 
-It really is important to play around with this stuff first hand. There is no substitute for experience. Run it with 2 processes and with 5, and whatever else you might think of. Run it multiple times. Try to figure out if its working as intended. I looked at a dozen or so MPI templates and tutorials before I started trying to use it, and essentally none of the knwledge I "gained" doing this was worth anything. If you dont know how to run a piece of python code that uses MPI, you can look at my [post](https://kylejray.github.io/parallel/computing,/mpi,/python/2022/08/20/embarassing-parallel.html) about embarassingly parallel computation using mpi4py.
+It really is important to play around with this stuff first hand. There is no substitute for experience. Run it with 2 processes and with 5, and whatever else you might think of. Run it multiple times. Try to figure out if its working as intended. I looked at a dozen or so MPI templates and tutorials before I started trying to use it, and essentally none of the knwledge I "gained" doing this was worth anything. If you dont know how to run a piece of python code that uses MPI, you can look at my [post](https://kylejray.github.io/parallel/computing,/mpi,/python,/hpc,/high/performance/computing/2022/08/20/embarassing-parallel.html) about embarassingly parallel computation using mpi4py.
 
 ### did it work?
 
