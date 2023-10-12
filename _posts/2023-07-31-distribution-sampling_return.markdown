@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "return of the 'sampling from an arbitrary distribution' "
+title:  'return of the "sampling from an arbitrary distribution" '
 date:   2023-07-31
 categories: statistics, probability, thermodynamics, python
 ---
