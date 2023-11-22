@@ -9,11 +9,10 @@ sa_title : Momentum Computing
 sa_home : /momentum/
 ---
 ## Gigagertz Sub-Landauer Momentum Computing
-This is a supplemental animation to help visualize the protocol described in the manuscript below:
+This is a supplemental animation to help visualize the protocol described in the paper below:
 
 K. J. Ray and J. P. Crutchfield,
-- Gigahertz Sub-Landauer Momentum Computing, (2022).
-- [arxiv.org:2202.07122 [cond-mat.stat-mech]](https://arxiv.org/abs/2202.07122)
+- [Gigahertz Sub-Landauer Momentum Computing](https://journals.aps.org/prapplied/abstract/10.1103/PhysRevApplied.19.014049)
 
 <iframe width="540" height="540" align='right' src="https://drive.google.com/file/d/1JKr4OOiggspkMIBn4IaeBqyQaJ31ol2b/preview">
 </iframe>
