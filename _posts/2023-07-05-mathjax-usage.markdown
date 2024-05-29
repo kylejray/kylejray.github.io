@@ -1,6 +1,9 @@
 ---
 layout: post
-title:  "using LaTex in a jekyll created github-pages hosted website"
+title: 'Getting Nice LaTeX Equations in the blog'
+subtitle:  "using mathjax in a jekyll created github-pages hosted website"
+permalink: /:title/
+
 date:   2023-07-05
 categories: jekyll, github, github-pages, Latex, mathjax
 

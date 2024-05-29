@@ -1,6 +1,9 @@
 ---
 layout: post
 title:  "Gigahertz Sub-Landauer Momentum Computing"
+subtitle: 'physical computation that is both fast and cheap at the same time'
+permalink: /:title/
+
 date:   2022-05-24 03:35:00 -0800
 categories: jekyll update
 ---

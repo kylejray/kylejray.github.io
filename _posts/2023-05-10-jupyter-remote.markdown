@@ -1,6 +1,9 @@
 ---
 layout: post
-title:  "run code on a remote server using a jupyter notebook"
+title: "Using JupyterLab Remotely"
+subtitle:  "run code on a remote server using a jupyter notebook"
+permalink: /:title/
+
 date:   2023-05-01-1:30
 categories: python, jupyter, remote computing, HPC, anaconda, ipython
 ---

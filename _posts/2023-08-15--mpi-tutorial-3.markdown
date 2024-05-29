@@ -1,6 +1,9 @@
 ---
 layout: post
-title:  "nonblocking MPI message passing in python"
+title: 'MPI tutorial: take 3'
+subtitle:  "nonblocking MPI message passing in python"
+permalink: /:title/
+
 date:   2023-08-26
 categories: parallel computing, MPI, python, HPC, high performance computing
 ---

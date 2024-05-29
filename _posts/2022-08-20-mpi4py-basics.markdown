@@ -1,6 +1,9 @@
 ---
 layout: post
-title:  "using mpi4py to make embarassingly parallel computation simple"
+title: 'Basic mpi4py'
+subtitle: "using mpi4py to make embarassingly parallel computation simple"
+permalink: /:title/
+
 date:   2022-08-20
 categories: parallel computing, MPI, python, HPC, high performance computing
 ---

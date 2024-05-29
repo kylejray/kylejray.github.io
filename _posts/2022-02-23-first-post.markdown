@@ -1,6 +1,10 @@
 ---
 layout: post
-title:  "first post"
+title: First post
+subtitle:  ' "look mom! no html" '
+permalink: /:title/
+
+
 date:   2022-02-23
 categories: blog testing
 ---

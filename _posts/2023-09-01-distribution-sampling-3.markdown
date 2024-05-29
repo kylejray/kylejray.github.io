@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  'revenge of the "sampling from an arbitrary distribution" '
+permalink: /:title/
+title: 'Arbitrary Distribution Sampling III'
+subtitle: 'revenge of the "sampling form an arbitrary distribution" ' 
 date:   2023-09-21
-categories: statistics, probability, thermodynamics, python
+
+categories: 'statistics, probability, thermodynamics, python'
 ---
 {% include mathjax.html %}
 
@@ -79,13 +82,13 @@ So far this doesnt look like much of an improvement for quite a bit of overhead,
 
 ### The curse of dimensionality
 
-We can imagine that the pdf is composed of some number of "features" in the state space. Each feature being a region that has non-negligible probability density. For example, lets say that the target pdf above has only one feature with a length $$L$$ of about 3 units (from -1.5 to 1.5). In the case above, we set the domain we look at to have a width $$V$$ of 4 (from -2,2). THe probability of a uniform disribution hitting somewhere inside the high proability region associated with the deature is $$L/V = .75$$. Now, lets say the feature was in 2D instead. Even if we have as good information about the second dimension (for the sake of argument lets say the feature is the same size in the second dimension), then the probability of hitting the featue in a uniform distribution is $$(L/V)^2 \approx .56 $$, since the feature will have a size of $$L^2$$and the domain will have a size $$V^2$$. Thus, as we scale up to high dimensional probability distributions, the uniform disribution will have a harder and harder time hittig the regions with high probability.
+We can imagine that the pdf is composed of some number of "features" in the state space. Each feature being a region that has non-negligible probability density. For example, lets say that the target pdf above has only one feature with a length $$L$$ of about 3 units (from -1.5 to 1.5). In the case above, we set the domain we look at to have a width $$V$$ of 4 (from -2,2). THe probability of a uniform disribution hitting somewhere inside the high proability region associated with the deature is $$L/V = .75$$. Now, lets say the feature was in 2D instead. Even if we have as good information about the second dimension (for the sake of argument lets say the feature is the same size in the second dimension), then the probability of hitting the featue in a uniform distribution is $$(L/V)^2 \approx .56 $$, since the feature will have a size of $$L^2$$and the domain will have a size $$V^2$$. Thus, as we scale up to high dimensional probability distributions, the uniform disribution will have a harder and harder time hitting the regions with high probability.
 
 So, in order to simulate this kind of behavior, lets compare some cases where the domain of values we look at is much larger than the size of the feature. To simuate a $$n$$ dimensional case, we should have the domain be $$(1/.75)^n$$ times larger than the feature size (4 units). Thus, simulating a 2D feature would give us a domain of (-3.5,3.5) and simulating a 6D feature (a probability distribution on a 3D phase space, for instance) gives a doman of about (-11,11).
 
 Returning to the code above and changing xmin and xmax accodring to these values yields a speed up of 2.4X for the "2D" case, and a speedup of 4.2X for the "6D" case when comparing the smart histogram to the uniform distribution. Realistically, we are wanting to automate this process, so we can rely on setting such a nice tight window for our distribution, it would be more realistic to have our base window be a more conservative (-3,3) rather than the very tight window of (-2,2). This will also have an effect on the performance scaling, yielding a window of (-4.5,4.5) for the 2D and (-23,23) for the 6D case. WHile we can interpolate the speedup for the more conservative 2D window, after runnng another test for the conservative 6D window, I found the speed up to be 7.7X.
 
-Thus, it does seem there is a path for scaleability here-- but, as usual, it isnt as simple as we might have hoped. The speedup could probably be improved by not scaling the number of histogram bins linearly with the size of the domain (I expect this is why we start to loose efficiency for large domains). And, we havent even implemented the "smarter" histogram discussed at the end of the last installment that compares the pdf at both the corners and also the midpoint for each bin when choosing the weights. THese are pretty simple additons to what we already have, so I will eave them as an "exercise for the reader".
+Thus, it does seem there is a path for scaleability here-- but, as usual, it isnt as simple as we might have hoped. The speedup could probably be improved by not scaling the number of histogram bins linearly with the size of the domain (I expect this is why we start to loose efficiency for large domains). And, we havent even implemented the "smarter" histogram discussed at the end of the last installment that compares the pdf at both the corners and also the midpoint for each bin when choosing the weights. These are pretty simple additons to what we already have, so I will eave them as an "exercise for the reader".
 
 ### Can we do better?
 

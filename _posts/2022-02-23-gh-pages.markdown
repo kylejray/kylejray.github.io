@@ -1,6 +1,9 @@
 ---
 layout: post
 title:  "gh-pages workflow"
+subtitle: 'step by step instructions to copy this site'
+permalink: /:title/
+
 date:   2022-02-23-3:40
 categories: blog testing
 ---

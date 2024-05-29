@@ -1,6 +1,9 @@
 ---
 layout: post
-title:  "how to make ssh as painless as possible"
+title: 'Make ssh as Painless as Possible'
+subtitle:  "how to train your ssh config file"
+permalink: /:title/
+
 date:   2023-02-12-1:30
 categories: work from home, ssh, remote computing, scp, bash
 ---

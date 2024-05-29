@@ -1,6 +1,9 @@
 ---
 layout: post
-title:  "leveraging the sleep command"
+title: 'Shortcut to bash Script Automation'
+subtitle:  "sleep is good"
+permalink: /:title/
+
 date:   2023-04-21-1:30
 categories: git, bash, ssh, remote computing
 ---

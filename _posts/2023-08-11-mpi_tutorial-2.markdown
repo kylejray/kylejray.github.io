@@ -1,6 +1,9 @@
 ---
 layout: post
-title:  "mpi4py for actually parallel computing: take 2"
+title: 'MPI tutorial: take 2'
+subtitle:  "using mpi4py for non-embarassingly parallel computing"
+permalink: /:title/
+
 date:   2023-08-11
 categories: parallel computing, MPI, python, HPC, high performance computing
 ---

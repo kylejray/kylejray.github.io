@@ -1,6 +1,9 @@
 ---
 layout: post
-title:  "tmux, destroyer of SSH headaches"
+title: 'Keeping Processes Running on Remote Machines'
+subtitle:  "tmux, destroyer of SSH headaches"
+permalink: /:title/
+
 date:   2023-06-12-2:30
 categories: python, jupyter, remote computing, HPC, anaconda, ipython, tmux, brew
 ---

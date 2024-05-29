@@ -1,14 +1,17 @@
 ---
 layout: post
-title:  'the thermodynami uncertainty theorem'
-date:   2023-11-17
-categories: statistics, probability, thermodynamics, python
+title: 'The Thermodynamic Uncertainty Theorem'
+permalink: /:title/
+subtitle: 'how stochastic entropy production affects precision'
+categories: thermodynamics, statistics, entropy
+date:   2023-09-21
+
 ---
 {% include mathjax.html %}
 
 ### New Paper!
 
-Hi there, this is just a quick update to post about our newest publication in PRE, [The Thermodynamic Uncertainty Theorem](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.108.054126). You can check out the full paper through that link, but I'll also post the abstract below:
+Hi there, this is just a quick update to post about my newest publication in PRE, [The Thermodynamic Uncertainty Theorem](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.108.054126). You can check out the full paper through that link, but I'll also post the abstract below:
 
 - Thermodynamic uncertainty relations (TURs) express a fundamental lower bound on the precision (inverse scaled variance) of any thermodynamic charge — e.g., work or heat—by functionals of the average entropy production. Relying on purely variational arguments, we significantly extend TUR inequalities by incorporating and analyzing the impact of higher statistical cumulants of the entropy production itself within the general framework of time-symmetrically-controlled computation. We derive an exact expression for the charge that achieves the minimum scaled variance, for which the TUR bound tightens to an equality that we name the thermodynamic uncertainty theorem (TUT). Importantly, both the minimum scaled variance charge and the TUT are functionals of the stochastic entropy production, thus retaining the impact of its higher moments. In particular, our results show that, beyond the average, the entropy production distribution's higher moments have a significant effect on any charge's precision. This is made explicit via a thorough numerical analysis of “swap” and “reset” computations that quantitatively compares the TUT against previous generalized TURs.
 

@@ -1,6 +1,9 @@
 ---
 layout: post
-title:  "video tiling in python ffmpeg"
+title: "Making a video collage in python"
+title:  "video tiling function using python ffmpeg"
+permalink: /:title/
+
 date:   2022-04-19-1:30
 categories: python, ffmpeg, video editing
 ---

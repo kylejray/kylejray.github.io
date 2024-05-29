@@ -1,6 +1,9 @@
 ---
 layout: post
-title:  "sampling from an arbitrary distribution"
+title:  "Sampling from an Arbitrary Distribution"
+subtitle: 'when np.normal just wont cut it'
+permalink: /:title/
+
 date:   2023-06-28
 categories: statistics, probability, thermodynamics, python
 ---
