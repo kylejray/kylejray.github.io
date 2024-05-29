@@ -10,11 +10,11 @@ categories: statistics, probability, thermodynamics, python
 {% include mathjax.html %}
 ### The first thing you probably found
 
-If you ask a random person (conditioned on them being a reasonable target for this question) how to sample from an arbitrary distribution, you are pretty likely to get this answer: "Just sample form a uniform distribution between 0 and 1, and invert the samples using the inverse cdf". This is a wonderfully elegant solution, and we might as well start by looking at how it works. We'll use a really simple PDF for lillustrative purposes: $$\text{pdf}(x) = 2x$$, which will be normalized with a domain of $$x \in [0,1]$$.
+If you ask a random person (conditioned on them being a reasonable target for this question) how to sample from an arbitrary distribution, you are pretty likely to get this answer: "Just sample from a uniform distribution between 0 and 1, and invert the samples using the inverse cdf". This is a wonderfully elegant solution, and we might as well start by looking at how it works. We'll use a really simple PDF for illustrative purposes: $$\text{pdf}(x) = 2x$$, which will be normalized with a domain of $$x \in [0,1]$$.
 
 ![The Linear Distribution]( {% link assets/images/distribution_sampling/linear_dist.png %} )
 
-We can calculate the cdf readily: $$\text{cdf}(x)= x^2$$, so the inverse cdf is a square root. With this information, it is trvial to sample say, 1,000,000 samples from the initial pdf:
+We can calculate the cdf readily: $$\text{cdf}(x)= x^2$$, so the inverse cdf is a square root. With this information, it is trivial to sample say, 1,000,000 samples from the initial pdf:
 
 {% highlight python %}
 # sample 1,000,000 values from cdf(x)
@@ -30,15 +30,15 @@ It did.
 ### The catch
 You did need to invert the cdf, which can be a bit of a bummer. Or course, since you are working on a computer (probably) you can probably do a pretty good job of numerically integrating the pdf and building up a numeric inverse instead. But the real issue with this method is how it scales into higher dimensions.
 
-Unfortunately for anyone who lives or thinks in more than 1Dimension: the inverse cdf is only guarateed to exist and/or be well defined in a single dimension. Multivariate distributions typically have multi-valued inverse cdf relations. Just imagine a symmetric 2 dimensional gaussian distribution. There will be a circle of coordiantes at a radius $$r$$ from the peak of the gaussian that all share the same probability, so just choosing a probability between $$0$$ and $$1$$ will not give you an unambiguous point in coordinate space. Additionally, the size of these regions depends on how far from the center you are-- so it doesn't evem make sense to sample the probability uniformly anyway. So, let's work on a method that will work for multivariate distributions.
+Unfortunately for anyone who lives or thinks in more than 1Dimension: the inverse cdf is only guaranteed to exist and/or be well defined in a single dimension. Multivariate distributions typically have multi-valued inverse cdf relations. Just imagine a symmetric 2 dimensional gaussian distribution. There will be a circle of coordinates at a radius $$r$$ from the peak of the gaussian that all share the same probability, so just choosing a probability between $$0$$ and $$1$$ will not give you an unambiguous point in coordinate space. Additionally, the size of these regions depends on how far from the center you are-- so it doesn't even make sense to sample the probability uniformly anyway. So, let's work on a method that will work for multivariate distributions.
 
 ### First pass at a new method
 Here is the idea: 
 * we generate a point $$Y$$ in our domain using a uniform distribution
-* we calcualte the probability $$\text{pdf}(Y)$$ of that point using the known target pdf
-* we genenrate a random uniform variable $$U \in [0,1]$$,
+* we calculate the probability $$\text{pdf}(Y)$$ of that point using the known target pdf
+* we generate a random uniform variable $$U \in [0,1]$$,
 * we accept the point Y as being part of our sample if $$U \leq \text{pdf}(Y)$$
-The idea behind this is intuitive. We are more likely to accept the higher probability events and less likely to accept the low probability ones, and the ratio between these acceptances is the ratio of ther relative probabilities. Thus, we would expect our list of accepted $$Y$$ values to follow the target pdf. Sure, we have lost some efficiency, because we have to spend resources making samples that will be rejected-- but that is the tradeoff ofr this more general method. Let's take a look at how this works in practice, using the same target distribution as above:
+The idea behind this is intuitive. We are more likely to accept the higher probability events and less likely to accept the low probability ones, and the ratio between these acceptances is the ratio of the relative probabilities. Thus, we would expect our list of accepted $$Y$$ values to follow the target pdf. Sure, we have lost some efficiency, because we have to spend resources making samples that will be rejected-- but that is the tradeoff ofr this more general method. Let's take a look at how this works in practice, using the same target distribution as above:
 {% highlight python %}
 def target_dist(x):
     return 2*x
@@ -59,14 +59,14 @@ Well, what happened was that $$\text{pdf}(x)$$ was actually larger than 1 for ha
 
 * we want to generate a realization of the random variable $$X$$ distributed according to a "target distribution" $$f(x)$$
 * we generate a random variable $$Y$$ using an easy to sample from  "proposal distribution" $$g(Y)$$
-* we genenrate a random uniform variable $$U \in [0,1]$$,
+* we generate a random uniform variable $$U \in [0,1]$$,
 * we accept the point Y as being part of our sample if $$U \leq \frac{f(Y)}{M\cdot g(Y)}$$
 * M is a constant parameter, chosen so that the ratio on the RHS of the inequality never surpasses 1
 
-Assuming that both distibutions are normalized, we can use $$M$$ as a measure of the efficiency of the algorithm because $$1/M$$ is approximately the probability of accepting a sample $$Y$$. Revisiting our previous case, we can see that with the uniform distribution having $$g(Y)=1$$ in our domain that we will need $$M=2$$ to ensure the ratio of $$\frac{f(Y)}{M\cdot g(Y)} \leq 1$$ for our entire domain. And, we expect to throw out $$ \sim 50\%$$ of our geenrated $$Y$$ values. So we expect to generate $$2N$$ samples of $$Y$$ to generate $$N$$ samples of $$X$$. Let's make a little function to do the rejection sampling for us
+Assuming that both distributions are normalized, we can use $$M$$ as a measure of the efficiency of the algorithm because $$1/M$$ is approximately the probability of accepting a sample $$Y$$. Revisiting our previous case, we can see that with the uniform distribution having $$g(Y)=1$$ in our domain that we will need $$M=2$$ to ensure the ratio of $$\frac{f(Y)}{M\cdot g(Y)} \leq 1$$ for our entire domain. Thus, we expect to throw out $$ \sim 50\%$$ of our generated $$Y$$ values. So we expect to generate $$2N$$ samples of $$Y$$ to generate $$N$$ samples of $$X$$.
 
 
-Now, to try it out. We run the exact same code as before. Except, we add in the effect of $$M$$:
+Now, to try it out. We run the exact same code as before. Except, we add in $$M=2$$:
 {% highlight python %}
 
 Y = np.random.uniform(0,1,N)
@@ -88,7 +88,7 @@ ax.set_title(f'generated {n} samples, accepted {len(accepted_samples)}')
 
 And there we go! This is rejection sampling in a nutshell. Of course, it's probably clear as this point that a uniform distribution is not the most efficient distribution for our target pdf. Ideally, we want the proposal distribution to be as close to the target distribution as we can make it, while still being easy to sample from. Could we leverage the ability to easily sample from gaussians to do a better job? At first glance it seems like a bad idea: the Gaussian is totally symmetric and our target_dist is absolutely not. However, by generating a normally distributed variable $$G$$ and taking the absolute value, we can create a one sided distribution that is well suited for our purposes.
 
-With $$Y = 1-\text{abs}(G(0,\sigma))$$, we can see that the distribution of $$Y$$ looks quite similar to our target distrbution, with a value of $$M$$ that is quite close to $$1$$
+With $$Y = 1-\text{abs}(G(0,\sigma))$$, we can see that the distribution of $$Y$$ looks quite similar to our target distribution, with a value of $$M$$ that is quite close to $$1$$
 
 {% highlight python %}
 from scipy.stats import norm
@@ -123,7 +123,7 @@ fig.legend()
 
 ![Similar Distributions]( {% link assets/images/distribution_sampling/one_sided_normal.png %} )
 
-We can see that the ratio $$\frac{f(Y)}{M\cdot g(Y)}$$ will always be less than one, guaranteeing a good sample of our target distribution; but, at the same time, it will often be very close to one guaranteeing a high degree of efficiency with accepting our genenrated samples.
+We can see that the ratio $$\frac{f(Y)}{M\cdot g(Y)}$$ will always be less than one, guaranteeing a good sample of our target distribution; but, at the same time, it will often be very close to one guaranteeing a high degree of efficiency with accepting our generated samples.
 
 Now that we have the hang of it, lets make a time saving function to do this rejection sampling for us:
 {% highlight python %}
@@ -167,7 +167,7 @@ Now, with the obligatory histogram of accepted samples to see how we did...
 
 ### Next steps
 
-Ok, so we got better sample efficiency by handcrafting a gaussian to fit our pdf, but that kind of fine tuning  by hand isnt really a scaleable option. Additionally, the extra efficiency needs to offset the extra computational time it takes to sample from the gaussian rather than the uniform distibution. In the next installment we will go over some attempts to automate the process of creating a proposal distribution and also about the pros and cons of using un-normalized distributions.
+Ok, so we got better sample efficiency by handcrafting a gaussian to fit our pdf, but that kind of fine tuning  by hand isn't really a scalable option. Additionally, the extra efficiency needs to offset the extra computational time it takes to sample from the gaussian rather than the uniform distribution. In the next installment we will go over some attempts to automate the process of creating a proposal distribution and also about the pros and cons of using un-normalized distributions.
 
 
 

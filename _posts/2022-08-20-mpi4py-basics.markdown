@@ -10,23 +10,23 @@ categories: parallel computing, MPI, python, HPC, high performance computing
 
 ### What are we doing here?
 
-I have been using our computing cluster for a couple years now to do large suites of simulations that would otherwise take weeks to run on my laptop. Since I work mostly in simulations of nanoscale thermal systems, I often am looking for good satistics on noisy and uninterating systems-- so this can be all I need.
+I have been using our computing cluster for a couple years now to do large suites of simulations that would otherwise take weeks to run on my laptop. Since I work mostly in simulations of nanoscale thermal systems, I often am looking for good statistics on noisy and noninterating systems-- so this can be all I need.
 
 It was a tiny bit intimidating at first, but pretty quickly I realized that these kind of tasks are massively easy to run and incorporate into python, using the mpi4py library.
 
-The instalation of mpi4py can be a little finicky in the way it interacts with your MPI distribution (which also will need to be installed). I usually make sure that when I run MPI code, I am using a clean environment that has only what is necesarry to run the code. But this isnt about the installation, it's supposed to be a quick and dirty guide to get a bunch of jobs running simultaneously when they dont need to communicate.
+The installation of mpi4py can be a little finicky in the way it interacts with your MPI distribution (which also will need to be installed). I usually make sure that when I run MPI code, I am using a clean environment that has only what is necessary to run the code. But this isn't about the installation, it's supposed to be a quick and dirty guide to get a bunch of jobs running simultaneously when they don't need to communicate.
 
 ### Boilerplate MPI code
-Basically all my 'parallel' computaing code follows the same basic outline. I start by importing MPI, and always run these lines at the beginning of the script:
+Basically all my 'parallel' computing code follows the same basic outline. I start by importing MPI, and always run these lines at the beginning of the script:
 
 {% highlight python %}
 from mpi4py import MPI
 comm = MPI.COMM_WORLD
 size, rank = comm.Get_size(), comm.Get_rank()
 {% endhighlight %}
-This will define the most important variable in the whole setup: "rank". This variable will give you the current process ID and will be the basis for assinging dfferent tasks to different procs. And, thats what we do next.
+This will define the most important variable in the whole setup: "rank". This variable will give you the current process ID and will be the basis for assigning different tasks to different procedures. And, thats what we do next.
 
-Assume we have some class "SimRunner" in a module "simpack" that has a method "run", which does everyting we want it to do, provided it is initialized with some argument beween 0 and 1. All we need to do is use the variable "rank" to assing different arguments to different processes:
+Assume we have some class "SimRunner" in a module "simpack" that has a method "run", which does everything we want it to do, provided it is initialized with some argument between 0 and 1. All we need to do is use the variable "rank" to assign different arguments to different processes:
 
 {% highlight python %}
 from simpack import SimRunner
@@ -82,13 +82,13 @@ paramLists = [ simParams[i*L:(i+1)*L] for i in range(size) ]
 
 localSim = SimRunner()
 
-#assing a subset to each process
+#assign a subset to each process
 SimParams = paramLists[rank]
 
-#and then assing the elements in the subset with a serial loop
+#and then assign the elements in the subset with a serial loop
 for param in SimParams:
     localSim.initialize(param)
-    #continue as beofore within the loop
+    #continue as before within the loop
 
 {% endhighlight %}
 

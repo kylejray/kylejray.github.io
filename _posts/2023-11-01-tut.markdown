@@ -17,13 +17,13 @@ Hi there, this is just a quick update to post about my newest publication in PRE
 
 ![uncertainty bounds as a function of variance]( {% link assets/images/tut_image.png %} )
 
-### So... what does all that mean? What's going on in that picutre?
+### So... what does all that mean? What's going on in that picture?
 
-This is what the figure depicts: the minimal noise-to-signal ratio for a family of distributions that keeps the avegrage fixed while varying the variance.
+This is what the figure depicts: the minimal noise-to-signal ratio for a family of distributions that keeps the average fixed while varying the variance.
 
-The article comes within the context of a slew of results over the last 5 or so years on a family of inequalities called 'thermodynamic uncertainty relations' (TURs). To be very general: these relations set a bound on the accuracy of observables in the system absed on how much energy the system is dissipating into the environment on average.
+The article comes within the context of a slew of results over the last 5 or so years on a family of inequalities called 'thermodynamic uncertainty relations' (TURs). To be very general: these relations set a bound on the accuracy of observables in the system based on how much energy the system is dissipating into the environment on average.
 
-What we show is that the accuracy of the obsevables is determined by more than just the *average* dissipation in the system. We come up with a relation that tells us the most accurate observable possible based on *all* moments (mean, variance, skewness, kurtosis, etc...) of the dissipation. From this perspective, we can keep the average dissipation constant (this causes the previous TURs to look like staight lines) and see how changing even just the variance of the dissipation distrbution has pretty interesting effects on the most accurate current possible.
+What we show is that the accuracy of the observables is determined by more than just the *average* dissipation in the system. We come up with a relation that tells us the most accurate observable possible based on *all* moments (mean, variance, skewness, kurtosis, etc...) of the dissipation. From this perspective, we can keep the average dissipation constant (this causes the previous TURs to look like straight lines) and see how changing even just the variance of the dissipation distribution has pretty interesting effects on the most accurate current possible.
 
  
 

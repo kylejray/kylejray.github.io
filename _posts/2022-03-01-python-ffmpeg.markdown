@@ -1,14 +1,14 @@
 ---
 layout: post
-title: "Making a video collage in python"
-title:  "video tiling function using python ffmpeg"
+title: "Making a Video Collage in Python"
+subtitle:  "video tiling function using python ffmpeg"
 permalink: /:title/
 
 date:   2022-04-19-1:30
 categories: python, ffmpeg, video editing
 ---
 
-### Video Mosaic in python ffmpeg : sucess!
+### Video Mosaic in python ffmpeg : success!
 
 I have been working on a way to take a bunch of videos and tile them to play side by side, and the end result is below:
 
@@ -16,7 +16,7 @@ I have been working on a way to take a bunch of videos and tile them to play sid
 <iframe width="1020" height="540" src="https://drive.google.com/file/d/1CWeCPg8-86JfRDN7X5BJKq3pHfFv7iMP/preview">
 </iframe>
 
-How do we do it? Well, ffmpeg seems like the most powerful and common tool to do editing link this. But the syntax, at least for a python plebian like myself, is completely impenetrable. For example, here is a [stackoverflow answer](https://stackoverflow.com/questions/62976512/how-to-create-mosaic-video-with-both-audio-and-video-streams-ffmpeg):
+How do we do it? Well, ffmpeg seems like the most powerful and common tool to do editing link this. But the syntax, at least for a python plebian like myself, is completely impenetrable. For example, here is a [stack overflow answer](https://stackoverflow.com/questions/62976512/how-to-create-mosaic-video-with-both-audio-and-video-streams-ffmpeg):
 
 {% highlight bash %}
 ffmpeg -i lead_1.mp4 -i lead_2.mp4 -i lead_3.mp4 -i lead_4.mp4 

@@ -1,6 +1,8 @@
 ---
-title: MD test
-layout: default
+layout: post
+title:  "Using Markdown For Web"
+subtitle: 'a markdown playground'
+permalink: /:title/
 ---
 
 # Testing Markdown Page Creation

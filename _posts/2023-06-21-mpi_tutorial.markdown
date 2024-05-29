@@ -14,14 +14,14 @@ categories: parallel computing, MPI, python, HPC, high performance computing
 
 ### unashamedly parallel computing
 
-For several years, I have been satisfied by running parallel processes that don't need to talk to eachother. Mostly, I run large sims to get good statistics, and so this works totally fine. However, some of my more recent ideas to speed up some search algoithms will involve real comunication. In service of this, I am finally giving up my "embarassing only" policy when it comes to multi-node computing.
+For a couple of year, I have been satisfied by running parallel processes that don't need to talk to each other. Mostly, I run large sims to get good statistics, and so this works totally fine. However, some of my more recent ideas to speed up some search algorithms will involve real communication. In service of this, I am finally giving up my "embarrassing only" policy when it comes to multi-node computing.
 
 ### The goal
-In order to try this out, I have set up what I think is a very simple task that requires the processes to talk to eachother (It also captures the core action of what I want to use it for, but that's just gravy).
+In order to try this out, I have set up what I think is a very simple task that requires the processes to talk to each other (It also captures the core action of what I want to use it for, but that's just gravy).
 
-The code we are going to work on is simple: a guessing game. Each process will be given the task of guessing digits that havent been guessed by any of the other processes yet. They will go on guessing until all the 1-9 positive integers have been guessed.
+The code we are going to work on is simple: a guessing game. Each process will be given the task of guessing digits that haven't been guessed by any of the other processes yet. They will go on guessing until all the 1-9 positive integers have been guessed.
 
-While the goal is easy enough, actually making it happen is another matter. Take a look at the minimal working example below. Despite the pleothera of example MPI scripts online, I promise you that they wont just do what you want them to do out of the box if you aren't doing *exactly* what the examples already do. The code below actualy comes at the expense of a lot of trial and error--despite looking very simple.
+While the goal is easy enough, actually making it happen is another matter. Take a look at the minimal "working" example below. Despite the pleothera of example MPI scripts online, I promise you that they wont just do what you want them to do out of the box if you aren't doing *exactly* what the examples already do. The code below actually comes at the expense of a lot of trial and error--despite looking very simple.
 
 
 {% highlight python %}
@@ -31,8 +31,6 @@ size, rank = comm.Get_size(), comm.Get_rank()
 
 import numpy as np
 import sys
-
-
 
 final_list = [0]
 
@@ -67,13 +65,13 @@ print(f'rank {rank} got {j} points with {i} guesses')
 
 ## stop here, and actually run the code above before proceeding. 
 
-It really is important to play around with this stuff first hand. There is no substitute for experience. Run it with 2 processes and with 5, and whatever else you might think of. Run it multiple times. Try to figure out if its working as intended. I looked at a dozen or so MPI templates and tutorials before I started trying to use it, and essentally none of the knwledge I "gained" doing this was worth anything. If you dont know how to run a piece of python code that uses MPI, you can look at my [post](https://kylejray.github.io/parallel/computing,/mpi,/python,/hpc,/high/performance/computing/2022/08/20/embarassing-parallel.html) about embarassingly parallel computation using mpi4py.
+It's crucial to play around with this stuff first hand. There is no substitute for experience. Run it with 2 processes and with 5, and whatever else you might think of. Run it multiple times. Try to figure out if its working as intended. I looked at a dozen or so MPI templates and tutorials before I started trying to use it, and essentially none of the knowledge I "gained" doing this was worth anything. If you don't know how to run a piece of python code that uses MPI, you can look at my [post](https://kylejray.github.io/parallel/computing,/mpi,/python,/hpc,/high/performance/computing/2022/08/20/embarassing-parallel.html) about embarrassingly parallel computation using mpi4py.
 
 ### did it work?
 
-The code does approximately what we were hoping, but there is more going on under the hood. First off, if there is a "tie" in that two processes guess the same number o the same guess-- they both get a point. We didn't specify this rule, so its not exactly a failure, but we do want to know how to aovid this. There is also some implicit loop-syncing going on between the processes. After running the code with a few different options, I noticed that the number of guesses plus the number of points is the same for every process, implying the computation in one process is blocked at certain point, until the other processes "catch up". Let's verify this by implementing a time.sleep(rank+1) command before each guess. Naively, this should cause high rank processes to be slower and get few (if any) guesses in before the game ends.
+The code does approximately what we were hoping, but there is more going on under the hood. First off, if there is a "tie" in that two processes guess the same number on the same guess-- they both get a point. We didn't specify this rule, so it's not exactly a failure, but we do want to know how to avoid this. There is also some implicit loop-syncing going on between the processes. After running the code with a few different options, I noticed that the number of guesses plus the number of points is the same for every process, implying the computation in one process is blocked at certain point, until the other processes "catch up". Let's verify this by implementing a time.sleep(rank+1) command before each guess. Naively, this should cause high rank processes to be slower and get few (if any) guesses in before the game ends.
 
-We are going use datime as well, which is useful for figuring out when things happen. By now, you may have noticed that the order of the print statements that come from an MPI script is a bit unintuitive. Here is a helpful tool I use a lot when debugging and timing things:
+We are going use datetime as well, which is useful for figuring out when things happen. By now, you may have noticed that the order of the print statements that come from an MPI script is a bit unintuitive. Let's make a tool to help with debugging with respect to timing things:
 
 {% highlight python %}
 import datetime
@@ -82,7 +80,7 @@ def rel_time(start_time):
     return (current_time-start_time).total_seconds()
 {% endhighlight %}
 
-Now, let's ammend the script above-- to include our changes. This will also give us a chance to play around with the comm.bcast MPI command; which allows us to boradcast the initial starting time from one process to all the others. This ensures they have a common reference point.
+Now, let's amend the script above-- to include our changes. This will also give us a chance to play around with the comm.bcast MPI command; which allows us to broadcast the initial starting time from one process to all the others. This ensures they have a common reference point.
 
 {% highlight python %}
 from mpi4py import MPI
@@ -94,7 +92,7 @@ import sys
 import datetime
 from time import sleep
 
-#define global variable on all ranks initialized to None, this is necesarry for MPI to work properly
+#define global variable on all ranks initialized to None, this is necessary for MPI to work properly
 stime = None
 
 #generate a value only on rank 0
@@ -147,7 +145,7 @@ tprint(f'rank {rank} got {j} points with {i} guesses')
 
 ### unanswered questions
 
-After running this verson of the code, we can see some really interesting behavior in the timing. Here is a snippet of a simple 2 process game:
+After running this version of the code, we can see some really interesting behavior in the timing. Here is a snippet of a simple 2 process game:
 
 {% highlight bash %}
  .00: rank 0 guessed 1 on guess 1; has 0 points 
@@ -194,11 +192,13 @@ After running this verson of the code, we can see some really interesting behavi
 {% endhighlight %}
 
 
- My initial guess is that it is the allreduce operations that cause the syncing issues, but it is hard to tell, because the guessing is not delayed in the way I would have expected. Sometime, the relative delay of 1 second seems to work but other times it does not. The times do not look so reliable so we'll ignore them for now. Further testing is definitely necesarry.
+ My initial guess is that it is the allreduce operations that cause the syncing issues, but it is hard to tell, because the guessing is not delayed in the way I would have expected. Sometime, the relative delay of 1 second seems to work but other times it does not. The times do not look so reliable so we'll ignore them for now. Further testing is definitely necessary.
 
- #### update: after some testing, it turns out the timing issues were just discrete math errors. The timing was working as intended,07 and was fixed by formatting the realative time more carefully. This doesnt fix the issue below, but at least the timing isn't an issue.
+ #### update
+
+ After some testing, it turns out the timing issues were just discrete math errors. The timing was working as intended and was fixed by formatting the relative time more carefully (can you see the issue and fix?) This doesn't fix the issue below, but at least the timing isn't an issue.
  
- At first glance, it seems almost like allreduce cannot happen until all of the processes reach an allreduce line. In order to really make this work, we might need to deal with some manual sending/recieving from/to specific processes instead of relying on allreduce. This post is already geting too long, the next post will continue this investigation.
+ At first glance, it seems almost like allreduce cannot happen until all of the processes reach an allreduce line. In order to really make this work, we might need to deal with some manual sending/receiving from/to specific processes instead of relying on allreduce. This post is already getting too long, another post will continue this investigation.
 
 
 

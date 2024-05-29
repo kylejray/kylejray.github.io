@@ -24,6 +24,16 @@ What I finally figured out is that if I accept a little bit of redundancy, I can
     {% raw %}{% include mathjax.html %}{% endraw %}
 3. Now, when you write `$$ x+1=3 $$`, it will come out looking like $$x+1=3$$.
 
+Of course, this method can be applied without the redundancy of adding {% raw %}{% include mathjax.html %}{% endraw %} to every page. You can simply download the base.html layout from your jeckyll theme of choice and add the mathjax one-liner just above where the page content is created. As an example, here is how you would edit the minima theme base.html to allow mathjax on every page.
 
 
+{% highlight html %}
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        {% raw %}{% include mathjax.html %}
+        {{ content }}{% endraw %}
+      </div>
+    </main>
+{% endhighlight %}
 
+But, like I said above-- this will come at the cost of having more stuff to maintain yourself. You are no longer using the minima theme's base.html file but your own custom one.
