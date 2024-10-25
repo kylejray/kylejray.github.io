@@ -9,7 +9,7 @@ categories: parallel computing, MPI, python, HPC, high performance computing
 ---
 {% include mathjax.html %}
 
-#### note: part 2 of a series on using MPI in python, I suggest reading [the previous one before continuing](https://kylejray.github.io/parallel/computing,/mpi,/python,/hpc,/high/performance/computing/2023/06/21/unashamedly_parallel.html)
+#### note: part 2 of a series on using MPI in python, I suggest reading [the previous one before continuing](https://kylejray.github.io/mpi-tutorial-2)
 
 ### Refresher
 
