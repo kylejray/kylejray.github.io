@@ -45,7 +45,7 @@ The final step is to run the simulation and save the output however you please (
 {% highlight python %}
 import sys
 
-print(f'rank {rank} starting sim with p={simParam[rank]}')
+print(f'rank {rank} starting sim with p={simParams[rank]}')
 #MPI likes to cache all the print statements and then dump them all at the end. 
 #One way to make sure they print out during
 #the process is to consistently flush this cache using sys.stdout.flush()
