@@ -9,7 +9,7 @@ categories: parallel computing, MPI, python, HPC, high performance computing
 ---
 {% include mathjax.html %}
 
-#### note: part 2 of a series on using MPI in python, I suggest reading [the previous one before continuing](https://kylejray.github.io/mpi-tutorial-2)
+#### note: part 2 of a series on using MPI in python, I suggest reading [the previous one before continuing](/mpi-tutorial)
 
 ### Refresher
 
@@ -22,7 +22,7 @@ import numpy as np
 import sys
 from time import sleep
 from time import time
-
+gem 
 from mpi4py import MPI
 comm = MPI.COMM_WORLD
 size = comm.Get_size()  # number of MPI procs

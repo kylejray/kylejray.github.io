@@ -9,7 +9,7 @@ categories: 'statistics, probability, thermodynamics, python'
 ---
 {% include mathjax.html %}
 
-#### note: part 3 of a series on sampling from arbitrary distrbutions, I suggest reading [the second one before continuing](https://kylejray.github.io/statistics,/probability,/thermodynamics,/python/2023/07/31/distribution-sampling_return.html)
+#### note: part 3 of a series on sampling from arbitrary distrbutions, I suggest reading [the second one before continuing](/distribution-sampling-2)
 
 ### Refresher
 
