@@ -5,7 +5,8 @@
 layout: home
 ---
 
-<iframe src="https://drive.google.com/file/d/1dsRJyWKMuO3fPHC0Q_m7R-QMan5bW7or/preview" width="450" height="300" align='left' allow="autoplay"></iframe>
+<iframe src="https://drive.google.com/file/d/1fVzW9X7Mp65Hbs760lrjfU43QbJUMth4/preview" width="450" height="300" align='left' allow="autoplay"></iframe>
+
 
 # About Me
 Hi, my name is Kyle Ray. I am a postdoc at UC Davis, working under [James Crutchfield](http://csc.ucdavis.edu/~chaos/) at the [complexity science center](http://csc.ucdavis.edu/Welcome.html). 
