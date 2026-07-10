@@ -1,3 +1,6 @@
+- name: Visual Guide
+  link: /mc_explainer
+
 - name: Fredkin
   link: /fredkin
 
@@ -6,4 +9,3 @@
 
 - name: State Space
   link: /state_space
-

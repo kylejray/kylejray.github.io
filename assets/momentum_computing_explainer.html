@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Momentum Computing: A Visual Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
+  :root {
+    --bg: #0a0c10;
+    --panel: #0f1218;
+    --border: #1e2535;
+    --accent1: #00e5ff;  /* cyan */
+    --accent2: #ff4f6e;  /* coral */
+    --accent3: #a8ff78;  /* green */
+    --accent4: #ffb347;  /* amber */
+    --text: #c8d4e8;
+    --text-dim: #5a6a80;
+    --glow1: rgba(0,229,255,0.15);
+    --glow2: rgba(255,79,110,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Mono', monospace;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    text-align: center;
+    padding: 64px 24px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(0,229,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .kicker {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent1);
+    margin-bottom: 16px;
+    opacity: 0.8;
+  }
+
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 700;
+    color: #e8f0fc;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+  }
+
+  h1 span {
+    color: var(--accent1);
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: var(--text-dim);
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+  }
+
+  /* ── MAIN GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 16px;
+  }
+
+  .grid-full { grid-column: 1 / -1; }
+
+  /* ── PANEL ── */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .panel::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent1), transparent);
+    opacity: 0.3;
+  }
+
+  .panel-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+  }
+
+  .panel h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 20px;
+    color: #e8f0fc;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .panel p {
+    font-size: 12px;
+    line-height: 1.8;
+    color: var(--text-dim);
+    font-family: 'Libre Baskerville', serif;
+    margin-bottom: 12px;
+  }
+
+  /* ── PANEL: THE PROBLEM ── */
+  .ctmc-canvas {
+    width: 100%;
+    height: 180px;
+    position: relative;
+    margin: 20px 0;
+  }
+
+  .axis-label {
+    position: absolute;
+    font-size: 10px;
+    color: var(--text-dim);
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* SVG diagrams */
+  svg text { font-family: 'Space Mono', monospace; }
+
+  /* ── PANEL: BIT FLIP ── */
+  #flip-canvas {
+    display: block;
+    margin: 16px auto;
+  }
+
+  /* ── PANEL: PHASE SPACE ── */
+  #phase-canvas {
+    display: block;
+    margin: 16px auto;
+    cursor: pointer;
+  }
+
+  .play-btn {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--accent1);
+    border: 1px solid var(--accent1);
+    padding: 6px 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    background: transparent;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .play-btn:hover {
+    background: var(--glow1);
+  }
+
+  /* ── PANEL: ENERGY BAR ── */
+  .bar-row {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    gap: 12px;
+  }
+
+  .bar-label {
+    font-size: 10px;
+    color: var(--text-dim);
+    width: 120px;
+    flex-shrink: 0;
+    line-height: 1.4;
+  }
+
+  .bar-track {
+    flex: 1;
+    height: 20px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: width 1s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .bar-val {
+    font-size: 10px;
+    color: var(--text);
+    width: 80px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  /* ── PANEL: FREDKIN ── */
+  #fredkin-canvas { display: block; margin: 0 auto; }
+
+  /* ── PANEL: KEY INSIGHT ── */
+  .insight-panel {
+    background: transparent;
+    border: 1px solid var(--accent1);
+    padding: 32px;
+    position: relative;
+  }
+
+  .insight-panel::before {
+    content: '"';
+    position: absolute;
+    top: -20px; left: 20px;
+    font-size: 80px;
+    font-family: 'Libre Baskerville', serif;
+    color: var(--accent1);
+    opacity: 0.3;
+    line-height: 1;
+  }
+
+  .insight-text {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(15px, 2vw, 22px);
+    line-height: 1.6;
+    color: #e8f0fc;
+    text-align: center;
+  }
+
+  .insight-text em {
+    color: var(--accent1);
+    font-style: normal;
+  }
+
+  /* ── PANEL: COMPARISON TABLE ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    margin-top: 16px;
+  }
+
+  th {
+    text-align: left;
+    padding: 8px 12px;
+    color: var(--accent1);
+    border-bottom: 1px solid var(--border);
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(30,37,53,0.6);
+    color: var(--text-dim);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  td.good { color: var(--accent3); }
+  td.bad  { color: var(--accent2); }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    color: var(--text-dim);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 32px;
+    font-size: 10px;
+    color: var(--text-dim);
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 700px) {
+    .grid { grid-template-columns: 1fr; }
+    .grid-full { grid-column: 1; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kicker">Ray, Boyd, Wimsatt & Crutchfield · 2021–2023</div>
+  <h1>Momentum <span>Computing</span></h1>
+  <p class="subtitle">A new paradigm for thermodynamically efficient, computation-universal information processing using hidden momentum degrees of freedom.</p>
+</header>
+
+<div class="grid">
+
+  <!-- ══ PANEL 1: The CTMC Barrier ══ -->
+  <div class="panel">
+    <div class="panel-label">01 · The Problem</div>
+    <h2>Why Standard Frameworks Fail</h2>
+    <p>Continuous-time Markov chains (CTMCs) — the standard tool of stochastic thermodynamics — forbid many basic computations. A bit flip maps 0→1 and 1→0, but CTMC input-output matrices must have positive determinants. A bit flip has determinant −1.</p>
+    <svg id="ctmc-diagram" width="100%" viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg">
+      <!-- Position axis -->
+      <line x1="30" y1="150" x2="360" y2="150" stroke="#1e2535" stroke-width="1.5"/>
+      <text x="190" y="170" fill="#5a6a80" font-size="10" text-anchor="middle">position x</text>
+      <text x="12" y="155" fill="#5a6a80" font-size="10">0</text>
+      <line x1="190" y1="148" x2="190" y2="152" stroke="#5a6a80" stroke-width="1"/>
+      <text x="190" y="163" fill="#5a6a80" font-size="10" text-anchor="middle">0</text>
+
+      <!-- Double-well potential curve -->
+      <path d="M 40,30 Q 80,155 130,100 Q 175,50 190,90 Q 205,50 250,100 Q 300,155 360,30"
+            fill="none" stroke="#1e2535" stroke-width="2"/>
+      <!-- shaded wells -->
+      <path d="M 40,140 Q 80,155 130,100 Q 160,60 190,90 L 190,150 Z"
+            fill="rgba(255,79,110,0.07)"/>
+      <path d="M 190,90 Q 220,60 250,100 Q 300,155 360,140 L 360,150 L 190,150 Z"
+            fill="rgba(0,229,255,0.07)"/>
+
+      <!-- State labels -->
+      <text x="105" y="130" fill="#ff4f6e" font-size="14" font-weight="bold" text-anchor="middle">m=0</text>
+      <text x="275" y="130" fill="#00e5ff" font-size="14" font-weight="bold" text-anchor="middle">m=1</text>
+
+      <!-- Barrier label -->
+      <text x="190" y="82" fill="#5a6a80" font-size="9" text-anchor="middle">barrier</text>
+
+      <!-- CTMC block -->
+      <text x="190" y="18" fill="#ffb347" font-size="10" text-anchor="middle">× CTMC cannot cross: distributions overlap → states indistinguishable</text>
+
+      <!-- Animated particle stuck at barrier -->
+      <circle id="stuck-dot" cx="190" cy="90" r="5" fill="#ffb347" opacity="0.9"/>
+      <text x="192" y="62" fill="#ffb347" font-size="9">×</text>
+    </svg>
+    <p>Once distributions overlap at x=0, a memoryless (Markov) process cannot selectively route particles to opposite sides. Information is irrecoverably lost.</p>
+  </div>
+
+  <!-- ══ PANEL 2: The CTHMC Solution ══ -->
+  <div class="panel">
+    <div class="panel-label">02 · The Solution</div>
+    <h2>Momentum as Hidden Memory</h2>
+    <p>Expand state space to include momentum p. A particle's current momentum distinguishes its future trajectory even when positions overlap. This makes the dynamics a continuous-time <em>hidden</em> Markov chain (CTHMC).</p>
+    <svg id="phase-diagram" width="100%" viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Axes -->
+      <line x1="30" y1="190" x2="360" y2="190" stroke="#1e2535" stroke-width="1.5"/>
+      <line x1="190" y1="10" x2="190" y2="190" stroke="#1e2535" stroke-width="1.5"/>
+      <text x="370" y="194" fill="#5a6a80" font-size="10">x</text>
+      <text x="195" y="14" fill="#5a6a80" font-size="10">p</text>
+
+      <!-- Elliptical phase orbit - State 0 (left well) -->
+      <ellipse cx="110" cy="100" rx="65" ry="45" fill="none" stroke="#ff4f6e" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/>
+
+      <!-- Elliptical phase orbit - State 1 (right well) -->
+      <ellipse cx="270" cy="100" rx="65" ry="45" fill="none" stroke="#00e5ff" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/>
+
+      <!-- Particles on orbits -->
+      <!-- State 0 particle -->
+      <circle id="p0" cx="110" cy="55" r="6" fill="#ff4f6e"/>
+      <!-- State 1 particle -->
+      <circle id="p1" cx="270" cy="145" r="6" fill="#00e5ff"/>
+
+      <!-- Arrows for orbit direction -->
+      <path d="M 170,90 L 178,96 L 170,100" fill="none" stroke="#ff4f6e" stroke-width="1.5"/>
+      <path d="M 330,104 L 322,98 L 330,94" fill="none" stroke="#00e5ff" stroke-width="1.5"/>
+
+      <!-- State labels -->
+      <text x="110" y="108" fill="#ff4f6e" font-size="12" font-weight="bold" text-anchor="middle">m=0</text>
+      <text x="270" y="108" fill="#00e5ff" font-size="12" font-weight="bold" text-anchor="middle">m=1</text>
+
+      <!-- Swap arrow -->
+      <path d="M 148,75 Q 190,40 232,75" fill="none" stroke="#a8ff78" stroke-width="2" marker-end="url(#arr)"/>
+      <path d="M 232,125 Q 190,160 148,125" fill="none" stroke="#a8ff78" stroke-width="2" marker-end="url(#arr2)"/>
+      <text x="190" y="36" fill="#a8ff78" font-size="10" text-anchor="middle">harmonic swap τ = π√(μ/k)</text>
+
+      <defs>
+        <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#a8ff78"/>
+        </marker>
+        <marker id="arr2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#a8ff78"/>
+        </marker>
+      </defs>
+    </svg>
+    <p>During computation, the system is briefly decoupled from the heat bath and a quadratic well V<sup>comp</sup> = kx²/2 is applied. Particles undergo half-period harmonic oscillation: x(τ) = −x(0). The swap costs <strong style="color:#a8ff78">zero net work</strong>.</p>
+  </div>
+
+  <!-- ══ PANEL 3: Bit Flip Mechanism ══ -->
+  <div class="panel">
+    <div class="panel-label">03 · The Mechanism</div>
+    <h2>Costless Bit Flip via Oscillation</h2>
+    <p>The protocol has three steps — decouple, oscillate for τ = π√(μ/k), recouple. The work at t=0 is exactly cancelled by the work at t=τ because the potential is even and the position flips sign.</p>
+    <svg width="100%" viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Timeline -->
+      <line x1="40" y1="160" x2="340" y2="160" stroke="#1e2535" stroke-width="1.5"/>
+
+      <!-- Phases -->
+      <!-- Storage phase -->
+      <rect x="40" y="100" width="60" height="60" fill="rgba(255,79,110,0.08)" stroke="#ff4f6e" stroke-width="1" opacity="0.7"/>
+      <text x="70" y="92" fill="#ff4f6e" font-size="9" text-anchor="middle">V store</text>
+      <text x="70" y="145" fill="#ff4f6e" font-size="10" text-anchor="middle">m=0</text>
+      <circle cx="70" cy="125" r="8" fill="#ff4f6e" opacity="0.9"/>
+
+      <!-- Computation phase -->
+      <rect x="120" y="100" width="140" height="60" fill="rgba(168,255,120,0.06)" stroke="#a8ff78" stroke-width="1" opacity="0.7"/>
+      <text x="190" y="92" fill="#a8ff78" font-size="9" text-anchor="middle">V comp = kx²/2  (decoupled from bath)</text>
+
+      <!-- Animated sine arc showing oscillation -->
+      <path d="M 120,125 Q 145,80 165,125 Q 185,170 205,125 Q 225,80 245,125 Q 255,148 260,125"
+            fill="none" stroke="#a8ff78" stroke-width="1.5" stroke-dasharray="3,2"/>
+
+      <!-- Arrow showing flip -->
+      <circle cx="120" cy="125" r="6" fill="#ff4f6e" opacity="0.7"/>
+      <circle cx="260" cy="125" r="6" fill="#00e5ff" opacity="0.7"/>
+      <path d="M 130,115 L 250,115" stroke="#a8ff78" stroke-width="1" stroke-dasharray="2,2"/>
+      <text x="190" y="112" fill="#a8ff78" font-size="9" text-anchor="middle">x(τ) = −x(0)</text>
+
+      <!-- Final storage phase -->
+      <rect x="280" y="100" width="60" height="60" fill="rgba(0,229,255,0.08)" stroke="#00e5ff" stroke-width="1" opacity="0.7"/>
+      <text x="310" y="92" fill="#00e5ff" font-size="9" text-anchor="middle">V store</text>
+      <text x="310" y="145" fill="#00e5ff" font-size="10" text-anchor="middle">m=1</text>
+      <circle cx="310" cy="125" r="8" fill="#00e5ff" opacity="0.9"/>
+
+      <!-- Time labels -->
+      <text x="40" y="175" fill="#5a6a80" font-size="9" text-anchor="middle">t=0</text>
+      <text x="120" y="175" fill="#5a6a80" font-size="9" text-anchor="middle">decouple</text>
+      <text x="260" y="175" fill="#5a6a80" font-size="9" text-anchor="middle">recouple</text>
+      <text x="340" y="175" fill="#5a6a80" font-size="9" text-anchor="middle">t=τ</text>
+
+      <!-- Work equation -->
+      <text x="190" y="30" fill="#ffb347" font-size="11" text-anchor="middle">W = V[x(0),0⁺]−V[x(0),0] + V[x(τ),τ]−V[x(τ),τ⁻] = 0</text>
+      <line x1="40" y1="40" x2="340" y2="40" stroke="#ffb347" stroke-width="0.5" opacity="0.3"/>
+    </svg>
+    <p>The key symmetry: V<sup>store</sup> is even in x, so the energy injection at t=0 is exactly recovered at t=τ. Net thermodynamic work ⟨W⟩ = 0. <strong style="color:#ffb347">This is forbidden by CTMC but allowed by CTHMC.</strong></p>
+  </div>
+
+  <!-- ══ PANEL 4: Fredkin Gate ══ -->
+  <div class="panel">
+    <div class="panel-label">04 · Universal Computing</div>
+    <h2>Fredkin Gate: Turing Completeness</h2>
+    <p>Generalizing to three particles implements the Fredkin (controlled swap) gate — a reversible, computation-universal operation. The x-particle acts as a control bit; if x&gt;0, the y and z particles undergo a coordinate-rotation swap.</p>
+    <svg width="100%" viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Gate box -->
+      <rect x="130" y="60" width="120" height="100" rx="4" fill="rgba(168,255,120,0.05)" stroke="#a8ff78" stroke-width="1.5"/>
+      <text x="190" y="85" fill="#a8ff78" font-size="13" font-weight="bold" text-anchor="middle">FREDKIN</text>
+      <text x="190" y="100" fill="#5a6a80" font-size="9" text-anchor="middle">controlled swap</text>
+
+      <!-- Input wires -->
+      <!-- mx -->
+      <line x1="30" y1="90" x2="130" y2="90" stroke="#ffb347" stroke-width="2"/>
+      <text x="20" y="94" fill="#ffb347" font-size="11" text-anchor="middle">mₓ</text>
+      <text x="75" y="84" fill="#ffb347" font-size="9" text-anchor="middle">control</text>
+
+      <!-- my -->
+      <line x1="30" y1="130" x2="130" y2="130" stroke="#ff4f6e" stroke-width="2"/>
+      <text x="20" y="134" fill="#ff4f6e" font-size="11" text-anchor="middle">m_y</text>
+
+      <!-- mz -->
+      <line x1="30" y1="155" x2="130" y2="155" stroke="#00e5ff" stroke-width="2"/>
+      <text x="20" y="159" fill="#00e5ff" font-size="11" text-anchor="middle">m_z</text>
+
+      <!-- Output wires -->
+      <line x1="250" y1="90" x2="350" y2="90" stroke="#ffb347" stroke-width="2"/>
+      <text x="362" y="94" fill="#ffb347" font-size="11">mₓ</text>
+
+      <!-- Swap lines for my/mz -->
+      <line x1="250" y1="130" x2="260" y2="130" stroke="#ff4f6e" stroke-width="2"/>
+      <line x1="260" y1="130" x2="320" y2="155" stroke="#ff4f6e" stroke-width="2" stroke-dasharray="4,2"/>
+      <line x1="320" y1="155" x2="350" y2="155" stroke="#ff4f6e" stroke-width="2"/>
+
+      <line x1="250" y1="155" x2="260" y2="155" stroke="#00e5ff" stroke-width="2"/>
+      <line x1="260" y1="155" x2="320" y2="130" stroke="#00e5ff" stroke-width="2" stroke-dasharray="4,2"/>
+      <line x1="320" y1="130" x2="350" y2="130" stroke="#00e5ff" stroke-width="2"/>
+
+      <text x="362" y="134" fill="#00e5ff" font-size="11">m_y</text>
+      <text x="362" y="159" fill="#ff4f6e" font-size="11">m_z</text>
+
+      <!-- Swap annotation -->
+      <text x="290" y="142" fill="#a8ff78" font-size="9">swap</text>
+      <text x="285" y="152" fill="#5a6a80" font-size="8">if mₓ=1</text>
+
+      <!-- Control dot -->
+      <circle cx="190" cy="90" r="5" fill="#ffb347"/>
+      <line x1="190" y1="90" x2="190" y2="115" stroke="#ffb347" stroke-width="1.5"/>
+
+      <!-- Truth table mini -->
+      <text x="50" y="185" fill="#5a6a80" font-size="9" text-anchor="middle">101 ↔ 110</text>
+      <text x="190" y="185" fill="#5a6a80" font-size="9" text-anchor="middle">all others fixed</text>
+      <text x="330" y="185" fill="#a8ff78" font-size="9" text-anchor="middle">W=0</text>
+    </svg>
+    <p>The same half-period oscillation trick, now in a rotated y'–z' basis, implements the swap only when x&gt;0. Fredkin gates are Turing complete — any computation is reachable. Implementation: <strong style="color:#a8ff78">zero average work</strong> in the ideal case.</p>
+  </div>
+
+  <!-- ══ PANEL 5: Energy Scale Comparison ══ -->
+  <div class="panel grid-full">
+    <div class="panel-label">05 · Thermodynamic Performance</div>
+    <h2>Energy Cost: Orders of Magnitude Below the State of the Art</h2>
+    <p>The second paper (Phys. Rev. Applied, 2023) implements momentum computing in a superconducting Josephson junction circuit, achieving sub-Landauer operation at GHz speeds. Compare with conventional approaches:</p>
+
+    <div style="margin-top: 20px;">
+
+      <div class="bar-row">
+        <div class="bar-label">CMOS gate<br><span style="font-size:9px;color:#3a4a60">(typical)</span></div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:100%; background:linear-gradient(90deg,#ff4f6e,#c02040);"></div>
+        </div>
+        <div class="bar-val" style="color:#ff4f6e;">~7,000 L</div>
+      </div>
+
+      <div class="bar-row">
+        <div class="bar-label">CMOS gate<br><span style="font-size:9px;color:#3a4a60">(efficient)</span></div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:43%; background:linear-gradient(90deg,#ff8060,#e05030);"></div>
+        </div>
+        <div class="bar-val" style="color:#ff8060;">~3,000 L</div>
+      </div>
+
+      <div class="bar-row">
+        <div class="bar-label">CMOS<br><span style="font-size:9px;color:#3a4a60">(theoretical floor)</span></div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:1.5%; background:linear-gradient(90deg,#ffb347,#e08020);"></div>
+        </div>
+        <div class="bar-val" style="color:#ffb347;">~100 L</div>
+      </div>
+
+      <div class="bar-row">
+        <div class="bar-label">Bit Erase<br><span style="font-size:9px;color:#3a4a60">(Landauer limit)</span></div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:0.015%; background:linear-gradient(90deg,#a8ff78,#60d040);"></div>
+          <div style="position:absolute;left:2px;top:50%;transform:translateY(-50%);width:2px;height:14px;background:#a8ff78;"></div>
+        </div>
+        <div class="bar-val" style="color:#a8ff78;">1 L</div>
+      </div>
+
+      <div class="bar-row">
+        <div class="bar-label">Bit Swap (JJ)<br><span style="font-size:9px;color:#3a4a60">(this work, ~1K)</span></div>
+        <div class="bar-track">
+          <div class="bar-fill" style="background:linear-gradient(90deg,#00e5ff,#0090c0); animation: pulse-bar 2s ease-in-out infinite alternate;">
+            <style>
+              @keyframes pulse-bar {
+                from { width: 0.0065%; opacity:0.8; }
+                to   { width: 0.0065%; opacity:1; }
+              }
+            </style>
+          </div>
+          <div style="position:absolute;left:2px;top:50%;transform:translateY(-50%);width:3px;height:14px;background:#00e5ff;box-shadow:0 0 8px #00e5ff;"></div>
+        </div>
+        <div class="bar-val" style="color:#00e5ff;">0.43 L</div>
+      </div>
+
+      <div class="bar-row">
+        <div class="bar-label">Ideal Swap<br><span style="font-size:9px;color:#3a4a60">(information-theoretic)</span></div>
+        <div class="bar-track">
+          <div style="position:absolute;left:2px;top:50%;transform:translateY(-50%);font-size:9px;color:#5a6a80;padding-left:2px;">exactly zero — logically reversible</div>
+        </div>
+        <div class="bar-val" style="color:#5a6a80;">0 L</div>
+      </div>
+    </div>
+
+    <p style="margin-top:16px;font-size:11px;">L = 1 Landauer = k<sub>B</sub>T ln2 ≈ 4×10⁻²¹ J at room temperature, ≈ 10⁻²³ J at 1 K. The Josephson junction implementation achieves minimum ⟨W⟩ = 0.43 Landauers — <strong style="color:#00e5ff">roughly 10,000× more efficient than the best current CMOS</strong> — operating at nanosecond timescales.</p>
+  </div>
+
+  <!-- ══ PANEL 6: CTMC vs CTHMC Table ══ -->
+  <div class="panel">
+    <div class="panel-label">06 · Framework Comparison</div>
+    <h2>CTMC vs. CTHMC</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th style="color:#ff4f6e">CTMC</th>
+          <th style="color:#00e5ff">CTHMC</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>State space</td>
+          <td class="bad">Position only</td>
+          <td class="good">Position + momentum</td>
+        </tr>
+        <tr>
+          <td>Bit flip</td>
+          <td class="bad">× Forbidden</td>
+          <td class="good">✓ Zero work</td>
+        </tr>
+        <tr>
+          <td>Bit swap</td>
+          <td class="bad">× Forbidden</td>
+          <td class="good">✓ Sub-Landauer</td>
+        </tr>
+        <tr>
+          <td>Fredkin gate</td>
+          <td class="bad">× Forbidden</td>
+          <td class="good">✓ Universal</td>
+        </tr>
+        <tr>
+          <td>Computation speed</td>
+          <td class="bad">W ∝ 1/τ (slow = cheap)</td>
+          <td class="good">Optimal τ* (fast + cheap)</td>
+        </tr>
+        <tr>
+          <td>Fidelity vs. cost</td>
+          <td class="bad">Trade-off</td>
+          <td class="good">Aligned: both improve together</td>
+        </tr>
+        <tr>
+          <td>Input-output det.</td>
+          <td class="bad">Must be positive</td>
+          <td class="good">No restriction</td>
+        </tr>
+        <tr>
+          <td>Physical substrate</td>
+          <td style="color:#5a6a80">Overdamped Langevin</td>
+          <td class="good">Underdamped (e.g., Josephson junctions, NEMS)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ══ PANEL 7: Physical Intuition ══ -->
+  <div class="panel">
+    <div class="panel-label">07 · Physical Intuition</div>
+    <h2>Why Momentum Is the Key</h2>
+    <p>When a system is <em>underdamped</em> — weakly coupled to its environment — its momentum persists long enough to carry information. This is a <em>hidden</em> state: not directly observable as a memory bit, but physically real and causally potent.</p>
+
+    <svg width="100%" viewBox="0 0 380 160" xmlns="http://www.w3.org/2000/svg">
+      <!-- Overdamped illustration -->
+      <text x="95" y="20" fill="#ff4f6e" font-size="10" text-anchor="middle" font-weight="700">OVERDAMPED</text>
+      <text x="95" y="32" fill="#5a6a80" font-size="8" text-anchor="middle">(CTMCs apply)</text>
+      <!-- Trajectory quickly dampens -->
+      <path d="M 30,90 Q 50,50 70,85 Q 80,95 90,90 Q 100,87 110,89 Q 140,90 160,90"
+            fill="none" stroke="#ff4f6e" stroke-width="1.5"/>
+      <text x="95" y="115" fill="#5a6a80" font-size="9" text-anchor="middle">momentum lost instantly</text>
+      <text x="95" y="127" fill="#5a6a80" font-size="9" text-anchor="middle">→ position all that matters</text>
+      <!-- Bath icon -->
+      <rect x="30" y="138" width="130" height="15" rx="2" fill="rgba(255,79,110,0.1)" stroke="#ff4f6e" stroke-width="0.5"/>
+      <text x="95" y="150" fill="#ff4f6e" font-size="8" text-anchor="middle">strong thermal bath coupling λ ≫ 1</text>
+
+      <!-- Divider -->
+      <line x1="190" y1="10" x2="190" y2="155" stroke="#1e2535" stroke-width="1"/>
+
+      <!-- Underdamped illustration -->
+      <text x="285" y="20" fill="#00e5ff" font-size="10" text-anchor="middle" font-weight="700">UNDERDAMPED</text>
+      <text x="285" y="32" fill="#5a6a80" font-size="8" text-anchor="middle">(CTHMCs needed)</text>
+      <!-- Trajectory oscillates many cycles -->
+      <path d="M 200,90 Q 215,50 230,90 Q 245,130 260,90 Q 275,50 290,90 Q 305,130 320,90 Q 340,55 360,90"
+            fill="none" stroke="#00e5ff" stroke-width="1.5"/>
+      <text x="285" y="115" fill="#5a6a80" font-size="9" text-anchor="middle">momentum persists for</text>
+      <text x="285" y="127" fill="#5a6a80" font-size="9" text-anchor="middle">O(10³) oscillations</text>
+      <!-- Bath icon -->
+      <rect x="200" y="138" width="160" height="15" rx="2" fill="rgba(0,229,255,0.07)" stroke="#00e5ff" stroke-width="0.5"/>
+      <text x="285" y="150" fill="#00e5ff" font-size="8" text-anchor="middle">weak thermal bath coupling λ ≪ 1</text>
+    </svg>
+
+    <p>In the Josephson junction device, ring-down times are O(10³) oscillations. The computation completes in under 15 ns — far faster than the thermalization timescale τ<sub>R</sub>. During this window, momentum is a reliable hidden memory register.</p>
+  </div>
+
+  <!-- ══ PANEL 8: Central Insight ══ -->
+  <div class="panel grid-full insight-panel">
+    <p class="insight-text">
+      Momentum computing works because <em>computation can be faster than thermalization</em>. When a particle's momentum persists, position space alone is an incomplete description — the system lives in <em>full phase space</em>. Exploiting this hidden structure enables bit operations that are at once <em>fast, accurate, and thermodynamically free</em>.
+    </p>
+  </div>
+
+</div>
+
+<footer>
+  Based on: Ray, Boyd, Wimsatt & Crutchfield, Phys. Rev. Research 3, 023164 (2021) &nbsp;·&nbsp; Ray & Crutchfield, Phys. Rev. Applied 19, 014049 (2023)
+</footer>
+
+<script>
+// Animate the phase-space orbiting particles
+(function() {
+  const p0 = document.getElementById('p0');
+  const p1 = document.getElementById('p1');
+  if (!p0 || !p1) return;
+
+  let t = 0;
+  function tick() {
+    t += 0.015;
+    // Particle on left ellipse
+    const x0 = 110 + 65 * Math.cos(t);
+    const y0 = 100 + 45 * Math.sin(t);
+    p0.setAttribute('cx', x0);
+    p0.setAttribute('cy', y0);
+    // Particle on right ellipse, opposite phase
+    const x1 = 270 + 65 * Math.cos(t + Math.PI);
+    const y1 = 100 + 45 * Math.sin(t + Math.PI);
+    p1.setAttribute('cx', x1);
+    p1.setAttribute('cy', y1);
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+// Pulse the stuck CTMC particle
+(function() {
+  const dot = document.getElementById('stuck-dot');
+  if (!dot) return;
+  let t = 0;
+  function tick() {
+    t += 0.03;
+    const wobble = 190 + 4 * Math.sin(t * 3);
+    const yWobble = 90 + 3 * Math.sin(t * 3.7);
+    dot.setAttribute('cx', wobble);
+    dot.setAttribute('cy', yWobble);
+    const op = 0.5 + 0.5 * Math.abs(Math.sin(t));
+    dot.setAttribute('opacity', op);
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+</script>
+
+</body>
+</html>
